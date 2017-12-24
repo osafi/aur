@@ -1,0 +1,26 @@
+language: generic
+services:
+  - docker
+before_install:
+  - docker build -t localnet/aurci .
+  - docker run -d -t --name aurci localnet/aurci bash
+install:
+  - docker cp pkgrepository.sh aurci:/home/pkguser
+  - docker cp pkgbuild.sh aurci:/home/pkguser
+before_script:
+  - docker cp pkglist aurci:/home/pkguser
+  - docker cp pkgkeys aurci:/home/pkguser
+script:
+  - docker exec aurci bash pkgrepository.sh ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
+  - docker exec aurci bash pkgbuild.sh ${TRAVIS_REPO_SLUG} ${TRAVIS_BUILD_ID}
+before_deploy:
+  - docker cp aurci:/home/pkguser/bin ${TRAVIS_TAG}
+deploy:
+  provider: releases
+  api_key: ${GITHUB_TOKEN}
+  file_glob: true
+  file: ${TRAVIS_TAG}/*{db,files,gz,xz}
+  overwrite: true
+  skip_cleanup: true
+  on:
+    branch: master
