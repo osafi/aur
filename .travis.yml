@@ -2,19 +2,18 @@ language: generic
 services:
   - docker
 before_install:
-  - docker build -t localnet/aurci .
-  - docker run -d -t --name aurci localnet/aurci bash
+  - docker run -d -t --name aurbuilder osafi/aurbuilder-docker bash
 install:
-  - docker cp pkgrepository.sh aurci:/home/pkguser
-  - docker cp pkgbuild.sh aurci:/home/pkguser
+  - docker cp pkgrepository.sh aurbuilder:/home/builder
+  - docker cp pkgbuild.sh aurbuilder:/home/builder
 before_script:
-  - docker cp pkglist aurci:/home/pkguser
-  - docker cp pkgkeys aurci:/home/pkguser
+  - docker cp pkglist aurbuilder:/home/builder
+  - docker cp pkgkeys aurbuilder:/home/builder
 script:
-  - docker exec aurci bash pkgrepository.sh ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
-  - docker exec aurci bash pkgbuild.sh ${TRAVIS_REPO_SLUG} ${TRAVIS_BUILD_ID}
+  - docker exec aurbuilder bash pkgrepository.sh ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
+  - docker exec aurbuilder bash pkgbuild.sh ${TRAVIS_REPO_SLUG} ${TRAVIS_BUILD_ID}
 before_deploy:
-  - docker cp aurci:/home/pkguser/bin ${TRAVIS_TAG}
+  - docker cp aurbuilder:/home/builder/bin ${TRAVIS_TAG}
 deploy:
   provider: releases
   api_key: ${GITHUB_TOKEN}

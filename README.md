@@ -1,22 +1,22 @@
-# aurci [![Build Status](https://travis-ci.org/localnet/aurci.svg?branch=master)](https://travis-ci.org/localnet/aurci)
+# aur [![Build Status](https://travis-ci.org/osafi/aur.svg?branch=master)](https://travis-ci.org/osafi/aur)
 
-Use [Travis CI](https://travis-ci.org/localnet/aurci) for building and packaging a few [AUR](https://aur.archlinux.org) packages and deploy them to [GitHub Releases](https://github.com/localnet/aurci/releases) so it can be used as repository in [Arch Linux](https://www.archlinux.org).
+Use [Travis CI](https://travis-ci.org/osafi/aur) for building and packaging a few [AUR](https://aur.archlinux.org) packages and deploy them to [GitHub Releases](https://github.com/osafi/aur/releases) so it can be used as repository in [Arch Linux](https://www.archlinux.org).
 
 ## Use repository
 
 To use as custom repository in [Arch Linux](https://www.archlinux.org), add to file `/etc/pacman.conf`:
 
 ```
-[aurci]
+[aur]
 SigLevel = Optional TrustAll
-Server = https://github.com/localnet/aurci/releases/download/repository
+Server = https://github.com/osafi/aur/releases/download/repository
 ```
 
 Then on the command line:
 
 ```
 pacman -Sy            # Refresh package database.
-pacman -Sl aurci      # Show packages in repository.
+pacman -Sl aur        # Show packages in repository.
 pacman -S {package}   # Install a package.
 ```
 
