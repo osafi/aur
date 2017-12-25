@@ -39,4 +39,7 @@ sudo tee -a "/etc/pacman.conf" << EOF
 Include = /etc/pacman.d/${pkgrepo}
 EOF
 
+# Sync repositories
+sudo pacman -Syu
+
 { set +ex; } 2>/dev/null

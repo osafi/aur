@@ -21,7 +21,7 @@ done
 mapfile pkglist < "pkglist"
 mapfile pkgkeys < "pkgkeys"
 
-# Remove packages from repository.
+# Remove packages from repository that are no longer in pkglist file
 cd "bin"
 while read pkgpackage; do
   repo-remove "${pkgrepo}.db.tar.gz" ${pkgpackage}
