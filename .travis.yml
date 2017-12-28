@@ -6,6 +6,7 @@ before_install:
 install:
   - docker cp pkgrepository.sh aurbuilder:/home/builder
   - docker cp pkgbuild.sh aurbuilder:/home/builder
+  - docker cp pkgclean.py aurbuilder:/home/builder
 before_script:
   - docker cp pkglist aurbuilder:/home/builder
   - docker cp pkgkeys aurbuilder:/home/builder
@@ -23,3 +24,5 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
+after_deploy:
+  - docker exec aurbuilder python pkgclean.sh ${GITHUB_TOKEN} ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}

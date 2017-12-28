@@ -40,6 +40,6 @@ Include = /etc/pacman.d/${pkgrepo}
 EOF
 
 # Sync repositories
-sudo pacman -Syu
+sudo pacman -Sy --noconfirm
 
 { set +ex; } 2>/dev/null
