@@ -25,4 +25,4 @@ deploy:
   on:
     branch: master
 after_deploy:
-  - docker exec aurbuilder bash pkgclean.py ${GITHUB_TOKEN} ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
+  - docker exec aurbuilder python pkgclean.py ${GITHUB_TOKEN} ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
