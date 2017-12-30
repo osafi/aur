@@ -25,7 +25,7 @@ def list_available_packages(repo):
     results = []
 
     # Use `pacman -Sl <repo>` to get all packages available in given repo
-    data = subprocess.Popen(['pacman', '-Sl', repo], stderr=subprocess.PIPE, stdout=subprocess.PIPE).communicate()
+    data = subprocess.Popen(['pacman', '-Syl', repo], stderr=subprocess.PIPE, stdout=subprocess.PIPE).communicate()
 
     for x in data[0].decode().split('\n'):
         if not x.split():
