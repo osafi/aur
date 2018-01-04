@@ -26,7 +26,7 @@ def list_available_packages(repo):
     results = []
     
     # Sync package database
-    subprocess.check_call(['pacman', '-Sy'], stdout=subprocess.DEVNULL)
+    subprocess.check_call(['sudo', 'pacman', '-Sy'], stdout=subprocess.DEVNULL)
     
     # Use `pacman -Sl <repo>` to get all packages available in given repo
     data = subprocess.Popen(['pacman', '-Sl', repo], stderr=subprocess.PIPE, stdout=subprocess.PIPE).communicate()
