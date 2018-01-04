@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python
 from github import Github
 import subprocess
@@ -10,6 +11,7 @@ def main():
     tag_name = sys.argv[3]
 
     packages = list_available_packages(repo_name)
+    print('Packages in [{0}]: {1}'.format(repo_name, packages))
 
     repository = Github(github_token).get_user().get_repo(repo_name)
 
