@@ -12,7 +12,7 @@ before_script:
   - docker cp pkgkeys aurbuilder:/home/builder
 script:
   - docker exec aurbuilder bash pkgrepository.sh ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
-  - docker exec aurbuilder bash -i pkgbuild.sh ${TRAVIS_REPO_SLUG} ${TRAVIS_BUILD_ID}
+  - docker exec aurbuilder bash pkgbuild.sh ${TRAVIS_REPO_SLUG} ${TRAVIS_BUILD_ID}
 before_deploy:
   - docker cp aurbuilder:/home/builder/bin ${TRAVIS_TAG}
 deploy:
