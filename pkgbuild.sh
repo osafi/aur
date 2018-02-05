@@ -6,6 +6,9 @@ set -ex
 export PACKAGER="https://travis-ci.org/${1}/builds/${2}"
 export AURDEST="$(pwd)/src"
 
+# Fix for installing cower (pod2man required on path)
+export PATH=/usr/bin/core_perl:$PATH
+
 # Variables declaration.
 declare -r pkgrepo="${1#*/}"
 declare -a pkglist=()
@@ -33,7 +36,6 @@ for pkgkey in ${pkgkeys[@]}; do
 done
 
 # Build outdated packages.
-echo $PATH
 aursync --repo ${pkgrepo} --root "bin" -nr ${pkglist[@]}
 
 { set +ex; } 2>/dev/null
