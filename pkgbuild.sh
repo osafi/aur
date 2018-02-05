@@ -29,7 +29,7 @@ cd ".."
 
 # Get package gpg keys.
 for pkgkey in ${pkgkeys[@]}; do
-  gpg --recv-keys --keyserver hkp://pgp.mit.edu ${pkgkey}
+  gpg --recv-keys --keyserver "hkp://pool.sks-keyservers.net" ${pkgkey}
 done
 
 # Build outdated packages.
