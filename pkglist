@@ -2,10 +2,8 @@ bluemix-cli
 cloudfoundry-cli
 google-chrome
 ice-ssb
-jdk
-jdk-docs
-jdk8
-jdk8-docs
+jdk10
+jdk10-docs
 jetbrains-toolbox
 keystore-explorer
 nerd-fonts-complete
