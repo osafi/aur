@@ -39,7 +39,7 @@ sudo tee -a "/etc/pacman.conf" << EOF
 Include = /etc/pacman.d/${pkgrepo}
 EOF
 
-# Sync repositories
-sudo pacman -Sy --noconfirm
+# Sync repositories and update archlinux-keyring for latest  signatures
+sudo pacman -Sy --noconfirm archlinux-keyring
 
 { set +ex; } 2>/dev/null
