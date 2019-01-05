@@ -8,7 +8,7 @@ declare -r pkgtag="${2}"
 declare -r pkgrepo="${1#*/}"
 
 # Download or create repository database for ${pkgrepo}
-cd "bin"
+mkdir -p bin && pushd bin
 if curl -L -O -O -f "https://github.com/${pkgslug}/releases/download/${pkgtag}/${pkgrepo}.{db,files}.tar.gz"; then
   ln -fs "${pkgrepo}.db.tar.gz" "${pkgrepo}.db"
   ln -fs "${pkgrepo}.files.tar.gz" "${pkgrepo}.files"
@@ -16,7 +16,7 @@ else
   rm -f "${pkgrepo}.db.tar.gz" "${pkgrepo}.files.tar.gz"
   repo-add "${pkgrepo}.db.tar.gz"
 fi
-cd ".."
+popd
 
 # Enable multilib repository.
 sudo sed -i -e "/\[multilib\]/,/Include/s/^#//" "/etc/pacman.conf"

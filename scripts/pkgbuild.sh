@@ -2,6 +2,9 @@
 
 set -ex
 
+# Make AURDEST directory
+mkdir -p src
+
 # Environment variables.
 export PACKAGER="https://travis-ci.org/${1}/builds/${2}"
 export AURDEST="$(pwd)/src"
@@ -24,11 +27,11 @@ mapfile pkglist < "pkglist"
 mapfile pkgkeys < "pkgkeys"
 
 # Remove packages from repository that are no longer in pkglist file
-cd "bin"
+mkdir -p bin && pushd bin
 while read pkgpackage; do
   repo-remove "${pkgrepo}.db.tar.gz" ${pkgpackage}
 done < <(comm -23 <(pacman -Sl ${pkgrepo} | cut -d" " -f2 | sort) <(aurchain ${pkglist[@]} | sort))
-cd ".."
+popd
 
 # Get package gpg keys.
 for pkgkey in ${pkgkeys[@]}; do
