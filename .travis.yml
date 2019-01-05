@@ -2,19 +2,19 @@ language: generic
 services:
   - docker
 before_install:
-  - docker run -d -t --name aurbuilder osafi/aurbuilder-docker bash
+  - docker run -d -t --name arch-pkg-builder osafi/arch-pkg-builder-docker bash
 install:
-  - docker cp scripts/pkgrepository.sh aurbuilder:/home/builder
-  - docker cp scripts/pkgbuild.sh aurbuilder:/home/builder
-  - docker cp scripts/pkgclean.py aurbuilder:/home/builder
+  - docker cp scripts/pkgrepository.sh arch-pkg-builder:/home/builder
+  - docker cp scripts/pkgbuild.sh arch-pkg-builder:/home/builder
+  - docker cp scripts/pkgclean.py arch-pkg-builder:/home/builder
 before_script:
-  - docker cp pkglist aurbuilder:/home/builder
-  - docker cp pkgkeys aurbuilder:/home/builder
+  - docker cp pkglist arch-pkg-builder:/home/builder
+  - docker cp pkgkeys arch-pkg-builder:/home/builder
 script:
-  - docker exec aurbuilder bash pkgrepository.sh ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
-  - travis_wait 60 docker exec aurbuilder bash pkgbuild.sh ${TRAVIS_REPO_SLUG} ${TRAVIS_BUILD_ID}
+  - docker exec arch-pkg-builder bash pkgrepository.sh ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
+  - travis_wait 60 docker exec arch-pkg-builder bash pkgbuild.sh ${TRAVIS_REPO_SLUG} ${TRAVIS_BUILD_ID}
 before_deploy:
-  - docker cp aurbuilder:/home/builder/bin ${TRAVIS_TAG}
+  - docker cp arch-pkg-builder:/home/builder/bin ${TRAVIS_TAG}
 deploy:
   provider: releases
   api_key: ${GITHUB_TOKEN}
@@ -25,4 +25,4 @@ deploy:
   on:
     branch: master
 after_deploy:
-  - docker exec aurbuilder python pkgclean.py ${GITHUB_TOKEN} ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
+  - docker exec arch-pkg-builder python pkgclean.py ${GITHUB_TOKEN} ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
