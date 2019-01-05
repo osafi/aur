@@ -2,7 +2,7 @@ language: generic
 services:
   - docker
 before_install:
-  - docker run -d -t --name arch-pkg-builder osafi/arch-pkg-builder-docker bash
+  - docker run -d -t --name arch-pkg-builder osafi/arch-pkg-builder bash
 install:
   - docker cp scripts/pkgrepository.sh arch-pkg-builder:/home/builder
   - docker cp scripts/pkgbuild.sh arch-pkg-builder:/home/builder
