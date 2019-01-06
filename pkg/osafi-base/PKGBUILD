@@ -9,3 +9,10 @@ license=('MIT')
 depends=(
 	'nodejs'
 )
+
+source=('testing.conf')
+md5sums=('8ddb15034bda674514af855a85ba326d')
+
+package() {
+	install -Dm 0644 testing.conf "$pkgdir/etc/testing.conf"
+}

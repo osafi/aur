@@ -4,16 +4,18 @@ set -ex
 
 # Variables declaration.
 declare -r pkgrepo="${1#*/}"
+declare -r repodir="$(pwd)/bin"
+declare -r repodb="${repodir}/${pkgrepo}.db.tar.gz"
 
 for package in pkg/* ; do
 	pushd "$package"
 	makepkg -CcfsA --noconfirm
-	mv *.pkg.tar.xz ~/bin/
+	mv *.pkg.tar.xz "${repodir}"
 	popd
 done
 
 pushd bin
-repo-add "${pkgrepo}.db.tar.gz" *.pkg.tar.xz
+repo-add "${repodb}" *.pkg.tar.xz
 popd
 
 { set +ex; } 2>/dev/null
