@@ -4,7 +4,7 @@ services:
 before_install:
   - docker run -d -t --name arch-pkg-builder osafi/arch-pkg-builder bash
 install:
-  - for s in scripts/* ; docker cp "$s" arch-pkg-builder:/home/builder ; done
+  - for s in scripts/* ; do docker cp "$s" arch-pkg-builder:/home/builder ; done
 before_script:
   - docker cp pkglist arch-pkg-builder:/home/builder
   - docker cp pkgkeys arch-pkg-builder:/home/builder
