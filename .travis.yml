@@ -4,15 +4,15 @@ services:
 before_install:
   - docker run -d -t --name arch-pkg-builder osafi/arch-pkg-builder bash
 install:
-  - docker cp scripts/pkgrepository.sh arch-pkg-builder:/home/builder
-  - docker cp scripts/pkgbuild.sh arch-pkg-builder:/home/builder
-  - docker cp scripts/pkgclean.py arch-pkg-builder:/home/builder
+  - for s in scripts/* ; docker cp "$s" arch-pkg-builder:/home/builder
 before_script:
   - docker cp pkglist arch-pkg-builder:/home/builder
   - docker cp pkgkeys arch-pkg-builder:/home/builder
+  - docker cp pkg arch-pkg-builder:/home/builder
 script:
-  - docker exec arch-pkg-builder bash pkgrepository.sh ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
-  - travis_wait 60 docker exec arch-pkg-builder bash pkgbuild.sh ${TRAVIS_REPO_SLUG} ${TRAVIS_BUILD_ID}
+  - docker exec arch-pkg-builder bash sync-remote-repo ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
+  - travis_wait 60 docker exec arch-pkg-builder bash build-aur ${TRAVIS_REPO_SLUG} ${TRAVIS_BUILD_ID}
+  - travis_wait 60 docker exec arch-pkg-builder bash build-pkg ${TRAVIS_REPO_SLUG}
 before_deploy:
   - docker cp arch-pkg-builder:/home/builder/bin ${TRAVIS_TAG}
 deploy:
@@ -25,4 +25,4 @@ deploy:
   on:
     branch: master
 after_deploy:
-  - docker exec arch-pkg-builder python pkgclean.py ${GITHUB_TOKEN} ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
+  - docker exec arch-pkg-builder python clean-remote-repo ${GITHUB_TOKEN} ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}

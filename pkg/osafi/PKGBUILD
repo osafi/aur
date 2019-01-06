@@ -1,0 +1,11 @@
+# Maintainer: Omeed Safi <omeed@safi.ms>
+pkgname=osafi-base
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Base system configuration for osafi systems"
+arch=('any')
+url="https://github.com/osafi/arch-pkgs"
+license=('MIT')
+depends=(
+	'nodejs'
+)
