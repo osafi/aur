@@ -9,6 +9,8 @@ before_script:
   - docker cp pkglist arch-pkg-builder:/home/builder
   - docker cp pkgkeys arch-pkg-builder:/home/builder
   - docker cp pkg arch-pkg-builder:/home/builder
+# TODO: change to using Dockerfile with ADDs to avoid the following line
+  - docker exec sudo chown -R builder:builder /home/builder
 script:
   - docker exec arch-pkg-builder bash sync-remote-repo ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
   - travis_wait 60 docker exec arch-pkg-builder bash build-aur ${TRAVIS_REPO_SLUG} ${TRAVIS_BUILD_ID}
