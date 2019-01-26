@@ -7,12 +7,56 @@ arch=('any')
 url="https://github.com/osafi/arch-pkgs"
 license=('MIT')
 depends=(
-	'nodejs'
+    'bash'
+    'bzip2'
+    'coreutils'
+    'cryptsetup'
+    'device-mapper'
+    'dhcpcd'
+    'diffutils'
+    'e2fsprogs'
+    'file'
+    'filesystem'
+    'findutils'
+    'gawk'
+    'gcc-libs'
+    'gettext'
+    'glibc'
+    'grep'
+    'gzip'
+    'inetutils'
+    'iproute2'
+    'iputils'
+    'jfsutils'
+    'less'
+    'licenses'
+    'linux'
+    'linux-firmware'
+    'logrotate'
+    'lvm2'
+    'man-db'
+    'man-pages'
+    'mdadm'
+    'netctl'
+    'pacman'
+    'pciutils'
+    'perl'
+    'procps-ng'
+    'psmisc'
+    'reiserfsprogs'
+    's-nail'
+    'sed'
+    'shadow'
+    'sysfsutils'
+    'systemd-sysvcompat'
+    'tar'
+    'texinfo'
+    'usbutils'
+    'util-linux'
+    'vi'
+    'which'
+    'xfsprogs'
+    # Everything above is from 'base' group
+    'sudo'
+    'vim'
 )
-
-source=('testing.conf')
-md5sums=('8ddb15034bda674514af855a85ba326d')
-
-package() {
-	install -Dm 0644 testing.conf "$pkgdir/etc/testing.conf"
-}
