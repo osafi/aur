@@ -1,0 +1,15 @@
+# Maintainer: Omeed Safi <omeed@safi.ms>
+pkgname=osafi-xps
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="System configuration for osafi XPS laptop"
+arch=('any')
+url="https://github.com/osafi/arch-pkgs"
+license=('MIT')
+depends=(
+    'bspwn'
+    'lightdm-webkit2-greeter'
+    'sxhkd'
+)
+
+# Need to add post install step to enable lightdm
