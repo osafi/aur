@@ -1,0 +1,40 @@
+# Maintainer: Omeed Safi <omeed@safi.ms>
+pkgbase='osafi'
+pkgname=(osafi-base osafi-dell-xps)
+pkgver=1
+pkgrel=1
+pkgdesc="System configuration for osafi systems"
+arch=('any')
+url="https://github.com/osafi/arch-pkgs"
+license=('MIT')
+groups=(osafi)
+
+package_osafi-base() {
+    provides=(vim vi)
+    conflicts=(vim vi)
+    install=osafi-base.install
+    
+    # Base group
+    depends=(bash bzip coreutils cryptsetup device-mapper dhcpcd diffutils e2fsprogs file filesystem findutils gawk gcc-libs gettext glibc grep gzip inetutils iproute2 iputils jfsutils less licenses linux linux-firmware logrotate lvm2 man-db man-pages mdadm netctl pacman pciutils perl procps-ng psmisc reiserfsprogs s-nail sed shadow sysfsutils systemd-sysvcompat tar texinfo usbutils util-linux vi which xfsprogs)
+    # Explicitly removed from base group: nano vi
+
+    # Extra general packages
+    depends+=(sudo exa dialog vim)
+}
+
+
+package_osafi-dell-xps() {
+    install=osafi-dell-xps.install
+    depends=(osafi-base)
+
+    # Login manager
+    depends+=(lightdm-webkit-theme-aether xorg-server)
+
+    # BSPWM
+    depends+=(bspwm sxhkd)
+
+
+#post_install() {
+#    systemctl enable --now lightdm.server
+#}
+}
