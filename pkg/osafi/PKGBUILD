@@ -15,13 +15,16 @@ package_osafi-base() {
     install=osafi-base.install
     
     # Base group
-    depends=(bash bzip coreutils cryptsetup device-mapper dhcpcd diffutils e2fsprogs file filesystem findutils gawk gcc-libs gettext glibc grep gzip inetutils iproute2 iputils jfsutils less licenses linux linux-firmware logrotate lvm2 man-db man-pages mdadm netctl pacman pciutils perl procps-ng psmisc reiserfsprogs s-nail sed shadow sysfsutils systemd-sysvcompat tar texinfo usbutils util-linux vi which xfsprogs)
-    # Explicitly removed from base group: nano vi
+    depends=(bash bzip2 coreutils cryptsetup device-mapper dhcpcd diffutils
+    e2fsprogs file filesystem findutils gawk gcc-libs gettext glibc grep gzip
+    inetutils iproute2 iputils less licenses linux linux-firmware logrotate lvm2
+    man-db man-pages mdadm pacman pciutils perl procps-ng psmisc s-nail sed shadow
+    sysfsutils systemd-sysvcompat tar texinfo usbutils util-linux which)
+    # Explicitly removed from base group: jsfutils nano netctl reiserfsprogs vi xfsprogs
 
     # Extra general packages
-    depends+=(sudo exa dialog vim)
+    depends+=(sudo exa dialog unzip vim)
 }
-
 
 package_osafi-dell-xps() {
     install=osafi-dell-xps.install
@@ -32,9 +35,4 @@ package_osafi-dell-xps() {
 
     # BSPWM
     depends+=(bspwm sxhkd)
-
-
-#post_install() {
-#    systemctl enable --now lightdm.server
-#}
 }
