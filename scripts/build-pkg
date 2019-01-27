@@ -9,7 +9,7 @@ declare -r repodb="${repodir}/${pkgrepo}.db.tar.gz"
 
 for package in pkg/* ; do
 	pushd "$package"
-	makepkg -CcfsA --noconfirm
+	makepkg --ignorearche --cleanbuild --clean --syncdeps --rmdeps --noconfirm --force
 	mv *.pkg.tar.xz "${repodir}"
 	popd
 done
