@@ -8,7 +8,7 @@ url="https://github.com/osafi/arch-pkgs"
 license=('MIT')
 depends=(
     'osafi-base'
-    'bspwn'
+    'bspwm'
     'lightdm-webkit-theme-aether'
     'sxhkd'
     'xorg-server' # required for lightdm greeters
