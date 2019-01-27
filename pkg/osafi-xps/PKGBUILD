@@ -7,9 +7,13 @@ arch=('any')
 url="https://github.com/osafi/arch-pkgs"
 license=('MIT')
 depends=(
+    'osafi-base'
     'bspwn'
-    'lightdm-webkit2-greeter'
+    'lightdm-webkit-theme-aether'
     'sxhkd'
+    'xorg-server' # required for lightdm greeters
 )
 
-# Need to add post install step to enable lightdm
+post_install() {
+    systemctl enable --now lightdm.server
+}

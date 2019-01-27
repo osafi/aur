@@ -1,5 +1,4 @@
 bcompare
-bluemix-cli
 cloudfoundry-cli
 etcher-bin
 google-chrome
@@ -7,15 +6,13 @@ ice-ssb
 jdk10
 jdk10-docs
 jetbrains-toolbox
-keystore-explorer
+lightdm-webkit-theme-aether
 nerd-fonts-complete
 nvm
 otf-fira-code
 pacaur
 polybar
 postman
-slack-desktop
-soapui
 system-san-francisco-font-git
 visual-studio-code-bin
 yadm-git
