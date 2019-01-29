@@ -1,6 +1,6 @@
 # Maintainer: Omeed Safi <omeed@safi.ms>
 pkgbase='osafi'
-pkgname=(osafi-base osafi-dell-xps)
+pkgname=(osafi-base osafi-desktop)
 pkgver=1
 pkgrel=2
 pkgdesc="System configuration for osafi systems"
@@ -8,6 +8,14 @@ arch=('any')
 url="https://github.com/osafi/arch-pkgs"
 license=('MIT')
 groups=(osafi)
+
+source=(
+    osafi-desktop-bspwm-config
+    osafi-desktop-sxhkd-config
+    osafi-desktop.sh
+)
+
+sha256sums=(SKIP SKIP SKIP)
 
 package_osafi-base() {
     provides=(vim vi)
@@ -26,13 +34,18 @@ package_osafi-base() {
     depends+=(sudo exa dialog unzip vim)
 }
 
-package_osafi-dell-xps() {
-    install=osafi-dell-xps.install
+package_osafi-desktop() {
+    install=osafi-desktop.install
     depends=(osafi-base)
 
     # Login manager
     depends+=(lightdm-webkit-theme-aether xorg-server)
 
     # BSPWM
-    depends+=(bspwm sxhkd)
+    depends+=(bspwm sxhkd termite)
+    # TODO: do correct permissions - especially for sxhkd
+    install -Dm 0755 osafi-desktop-bspwm-config "${pkgdir}/etc/osafi/bspwm/bspwmrc"
+    install -Dm 0755 osafi-desktop-sxhkd-config "${pkgdir}/etc/osafi/sxhkd/sxhkdrc"
+    
+    install -Dm 0755 osafi-desktop.sh "${pkgdir}/etc/X11/xinit/xinitrc.d/30-osafi-desktop.sh"
 }
