@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-dell-xps)
 pkgver=1
-pkgrel=1
+pkgrel=2
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
