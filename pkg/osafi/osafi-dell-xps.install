@@ -3,5 +3,5 @@ post_install() {
 }
 
 post_upgrade() {
-    systemctl enable --now lightdm.server
+    systemctl enable --now lightdm
 }
