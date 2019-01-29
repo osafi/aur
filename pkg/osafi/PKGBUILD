@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-desktop)
 pkgver=1
-pkgrel=2
+pkgrel=3
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
