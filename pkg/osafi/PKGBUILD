@@ -41,8 +41,12 @@ package_osafi-desktop() {
     # Login manager
     depends+=(lightdm-webkit-theme-aether xorg-server)
 
-    # BSPWM
-    depends+=(bspwm sxhkd termite)
+    # TODO: split this stuff out more (eg. 'bswpm', 'terminal', etc...)
+    depends+=(bspwm sxhkd termite feh)
+
+    # TODO: find more appropriate location for wallpaper
+    install -Dm 0644 osafi-desktop-wallpaper.png "${pkgdir}/etc/osafi/wallpaper.png"
+
     # TODO: do correct permissions - especially for sxhkd
     install -Dm 0755 osafi-desktop-bspwm-config "${pkgdir}/etc/osafi/bspwm/bspwmrc"
     install -Dm 0755 osafi-desktop-sxhkd-config "${pkgdir}/etc/osafi/sxhkd/sxhkdrc"
