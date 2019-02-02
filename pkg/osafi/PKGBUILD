@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=10
+pkgrel=11
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -10,7 +10,6 @@ license=('MIT')
 groups=(osafi)
 
 source=(
-    osafi-dell-xps-hidpi-monitor.conf
     osafi-dell-xps-hidpi.sh
     osafi-desktop-bspwm-config
     osafi-desktop-sxhkd-config
@@ -18,7 +17,7 @@ source=(
     osafi-desktop.sh
 )
 
-sha256sums=(SKIP SKIP SKIP SKIP SKIP SKIP)
+sha256sums=(SKIP SKIP SKIP SKIP SKIP)
 
 package_osafi-base() {
     install=osafi-base.install
@@ -76,12 +75,10 @@ package_osafi-desktop() {
 
     # Applications
     depends+=(google-chrome termite)
-
 }
 
 package_osafi-dell-xps() {
     depends=(osafi-desktop osafi-devel)
 
     install -Dm 0755 osafi-dell-xps-hidpi.sh "${pkgdir}/etc/X11/xinit/xinitrc.d/20-hidpi.sh"
-    install -Dm 0644 osafi-dell-xps-hidpi-monitor.conf "${pkgdir}/etc/X11/xorg.conf.d/90-hidpi-monitor.conf"
 }
