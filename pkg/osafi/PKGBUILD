@@ -1,8 +1,8 @@
 # Maintainer: Omeed Safi <omeed@safi.ms>
 pkgbase='osafi'
-pkgname=(osafi-base osafi-desktop)
+pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=6
+pkgrel=7
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -82,8 +82,6 @@ package_osafi-desktop() {
 package_osafi-dell-xps() {
     depends=(osafi-desktop osafi-devel)
 
-    install -Dm 0755 osafi-dell-xps-hidpi.sh \
-	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-hidpi.sh"
-    install -Dm 0644 osafi-dell-xps-hidpi-monitor.conf \
-	"${pkgdir}/etc/X11/xorg.conf.d/90-hidpi-monitor.conf"
+    install -Dm 0755 osafi-dell-xps-hidpi.sh "${pkgdir}/etc/X11/xinit/xinitrc.d/20-hidpi.sh"
+    install -Dm 0644 osafi-dell-xps-hidpi-monitor.conf "${pkgdir}/etc/X11/xorg.conf.d/90-hidpi-monitor.conf"
 }
