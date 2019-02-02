@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=14
+pkgrel=15
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -10,18 +10,18 @@ license=('MIT')
 groups=(osafi)
 
 source=(
-    osafi-dell-xps/osafi-dell-xps-hidpi.sh
-    osafi-desktop/osafi-desktop-bspwm-config
-    osafi-desktop/osafi-desktop-sxhkd-config
-    osafi-desktop/osafi-desktop-termite-config
-    osafi-desktop/osafi-desktop-wallpaper.png
-    osafi-desktop/osafi-desktop.sh
+    osafi-dell-xps-hidpi.sh
+    osafi-desktop-bspwm-config
+    osafi-desktop-sxhkd-config
+    osafi-desktop-termite-config
+    osafi-desktop-wallpaper.png
+    osafi-desktop.sh
 )
 
 sha256sums=(SKIP SKIP SKIP SKIP SKIP SKIP)
 
 package_osafi-base() {
-    install=osafi-base/osafi-base.install
+    install=osafi-base.install
     
     # Base group
     depends=(bash bzip2 coreutils cryptsetup device-mapper dhcpcd diffutils
@@ -48,7 +48,7 @@ package_osafi-devel() {
 }
 
 package_osafi-desktop() {
-    install=osafi-desktop/osafi-desktop.install
+    install=osafi-desktop.install
     depends=(osafi-base)
 
     # Login manager
@@ -67,27 +67,27 @@ package_osafi-desktop() {
     # BSPWM Desktop
     depends+=(bspwm sxhkd feh rofi nerd-fonts-complete)
 
-    install -Dm 0644 osafi-desktop/osafi-desktop-wallpaper.png \
+    install -Dm 0644 osafi-desktop-wallpaper.png \
 	"${pkgdir}/usr/share/backgrounds/osafi/wallpaper.png"
 
-    install -Dm 0755 osafi-desktop/osafi-desktop-bspwm-config \
+    install -Dm 0755 osafi-desktop-bspwm-config \
 	"${pkgdir}/etc/osafi/bspwm/bspwmrc"
-    install -Dm 0644 osafi-desktop/osafi-desktop-sxhkd-config \
+    install -Dm 0644 osafi-desktop-sxhkd-config \
 	"${pkgdir}/etc/osafi/sxhkd/sxhkdrc"
     
-    install -Dm 0755 osafi-desktop/osafi-desktop.sh \
+    install -Dm 0755 osafi-desktop.sh \
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/30-osafi-desktop.sh"
 
     # Applications
     depends+=(google-chrome termite)
 
-    install -Dm 0644 osafi-desktop/osafi-desktop-termite-config \
+    install -Dm 0644 osafi-desktop-termite-config \
 	"${pkgdir}/etc/xdg/termite/osafi-config"
 }
 
 package_osafi-dell-xps() {
     depends=(osafi-desktop osafi-devel)
 
-    install -Dm 0755 osafi-dell-xps/osafi-dell-xps-hidpi.sh \
+    install -Dm 0755 osafi-dell-xps-hidpi.sh \
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-hidpi.sh"
 }
