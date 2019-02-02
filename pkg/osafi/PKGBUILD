@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=8
+pkgrel=9
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -21,8 +21,6 @@ source=(
 sha256sums=(SKIP SKIP SKIP SKIP SKIP SKIP)
 
 package_osafi-base() {
-    provides=(vim vi)
-    conflicts=(vim vi)
     install=osafi-base.install
     
     # Base group
@@ -74,7 +72,7 @@ package_osafi-desktop() {
     install -Dm 0744 osafi-desktop-bspwm-config "${pkgdir}/etc/osafi/bspwm/bspwmrc"
     install -Dm 0644 osafi-desktop-sxhkd-config "${pkgdir}/etc/osafi/sxhkd/sxhkdrc"
     
-    install -Dm 0744 osafi-desktop.sh "${pkgdir}/etc/X11/xinit/xinitrc.d/30-osafi-desktop.sh"
+    install -Dm 0755 osafi-desktop.sh "${pkgdir}/etc/X11/xinit/xinitrc.d/30-osafi-desktop.sh"
 
     # Applications
     depends+=(google-chrome termite)
