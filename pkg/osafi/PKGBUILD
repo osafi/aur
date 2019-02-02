@@ -12,10 +12,11 @@ groups=(osafi)
 source=(
     osafi-desktop-bspwm-config
     osafi-desktop-sxhkd-config
+    osafi-desktop-wallpaper.png
     osafi-desktop.sh
 )
 
-sha256sums=(SKIP SKIP SKIP)
+sha256sums=(SKIP SKIP SKIP SKIP)
 
 package_osafi-base() {
     provides=(vim vi)
