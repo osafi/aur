@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=7
+pkgrel=8
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -10,13 +10,15 @@ license=('MIT')
 groups=(osafi)
 
 source=(
+    osafi-dell-xps-hidpi-monitor.conf
+    osafi-dell-xps-hidpi.sh
     osafi-desktop-bspwm-config
     osafi-desktop-sxhkd-config
     osafi-desktop-wallpaper.png
     osafi-desktop.sh
 )
 
-sha256sums=(SKIP SKIP SKIP SKIP)
+sha256sums=(SKIP SKIP SKIP SKIP SKIP SKIP)
 
 package_osafi-base() {
     provides=(vim vi)
