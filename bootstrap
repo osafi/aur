@@ -24,6 +24,10 @@ user=$(dialog --stdout --inputbox "Enter admin username" 0 0) || exit 1
 clear
 : ${user:?"user cannot be empty"}
 
+full_name=$(dialog --stdout --inputbox "Enter admin full name" 0 0) || exit 1
+clear
+: ${full_name:?"full name cannot be empty"}
+
 password=$(dialog --stdout --passwordbox "Enter admin password" 0 0) || exit 1
 clear
 : ${password:?"password cannot be empty"}
@@ -100,7 +104,7 @@ initrd   /initramfs-linux.img
 options  root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") rw
 EOF
 
-arch-chroot /mnt useradd -mU -s /usr/bin/zsh -G wheel,uucp,video,audio,storage,games,input "$user"
+arch-chroot /mnt useradd -mU -s /usr/bin/zsh -c $full_name -G wheel,uucp,video,audio,storage,games,input "$user"
 #TODO: arch-chroot /mnt chsh -s /usr/bin/zsh
 
 echo "$user:$password" | chpasswd --root /mnt
