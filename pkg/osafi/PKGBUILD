@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=19
+pkgrel=20
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -66,7 +66,7 @@ package_osafi-desktop() {
     xorg-xwd xorg-xwininfo xorg-xwud)
 
     # BSPWM Desktop
-    depends+=(bspwm sxhkd feh rofi nerd-fonts-complete lemonbar-git)
+    depends+=(bspwm sxhkd feh rofi nerd-fonts-complete lemonbar-xft-git)
 
     install -Dm 0644 osafi-desktop-wallpaper.png \
 	"${pkgdir}/usr/share/backgrounds/osafi/wallpaper.png"
