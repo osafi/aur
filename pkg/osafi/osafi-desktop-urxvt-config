@@ -1,0 +1,25 @@
+#!/bin/sh
+
+echo 'URxvt*font: xft:MesloLGS Nerd Font Mono:pixelsize=36:minspace=False, xft:DejaVu Sans:pixelsize=24' | xrdb -override
+echo 'URxvt*letterSpace: 0' | xrdb -override
+
+echo 'URxvt*background:   [97]#282a36' | xrdb -override
+echo 'URxvt*foreground:   #eff0eb' | xrdb -override
+echo 'URxvt*cursorColor:  #9aedfe' | xrdb -override
+
+echo 'URxvt*color0:      #33303b' | xrdb -override
+echo 'URxvt*color8:      #4f4b58' | xrdb -override
+echo 'URxvt*color1:      #ff5c57' | xrdb -override
+echo 'URxvt*color9:      #ff5c57' | xrdb -override
+echo 'URxvt*color2:      #5af78e' | xrdb -override
+echo 'URxvt*color10:     #5af78e' | xrdb -override
+echo 'URxvt*color3:      #f3f99d' | xrdb -override
+echo 'URxvt*color11:     #f3f99d' | xrdb -override
+echo 'URxvt*color4:      #57c7ff' | xrdb -override
+echo 'URxvt*color12:     #57c7ff' | xrdb -override
+echo 'URxvt*color5:      #ff6ac1' | xrdb -override
+echo 'URxvt*color13:     #ff6ac1' | xrdb -override
+echo 'URxvt*color6:      #9aedfe' | xrdb -override
+echo 'URxvt*color14:     #9aedfe' | xrdb -override
+echo 'URxvt*color7:      #eff0eb' | xrdb -override
+echo 'URxvt*color15:     #eff0eb' | xrdb -override

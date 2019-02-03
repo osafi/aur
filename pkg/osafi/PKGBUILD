@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=16
+pkgrel=18
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -14,7 +14,7 @@ source=(
     osafi-desktop-bspwm-config
     osafi-desktop-rofi.sh
     osafi-desktop-sxhkd-config
-    osafi-desktop-termite-config
+    osafi-desktop-urxvt-config
     osafi-desktop-wallpaper.png
     osafi-desktop.sh
 )
@@ -83,10 +83,10 @@ package_osafi-desktop() {
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/30-osafi-desktop.sh"
 
     # Applications
-    depends+=(google-chrome termite)
+    depends+=(google-chrome rxvt-unicode)
 
-    install -Dm 0644 osafi-desktop-termite-config \
-	"${pkgdir}/etc/xdg/termite/osafi-config"
+    install -Dm 0755 osafi-desktop-urxvt-config \
+	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-urxvt.sh"
 }
 
 package_osafi-dell-xps() {

@@ -1,15 +1,7 @@
 post_install() {
-    cp /etc/xdg/termite/config /etc/xdg/termite/config.original
-
     post_upgrade
 }
 
 post_upgrade() {
     systemctl enable --now lightdm
-
-    cp /etc/xdg/termite/osafi-config /etc/xdg/termite/config
-}
-
-pre_remove() {
-    mv /etc/xdg/termite/config.original /etc/xdg/termite/config
 }
