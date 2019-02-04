@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=21
+pkgrel=23
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -12,6 +12,8 @@ groups=(osafi)
 source=(
     osafi-dell-xps-hidpi.sh
     osafi-desktop-bspwm-config
+    osafi-desktop-polybar-config
+    osafi-desktop-polybar-launcher
     osafi-desktop-rofi-config
     osafi-desktop-sxhkd-config
     osafi-desktop-urxvt-config
@@ -19,7 +21,7 @@ source=(
     osafi-desktop.sh
 )
 
-sha256sums=(SKIP SKIP SKIP SKIP SKIP SKIP SKIP)
+sha256sums=(SKIP SKIP SKIP SKIP SKIP SKIP SKIP SKIP SKIP)
 
 package_osafi-base() {
     install=osafi-base.install
@@ -75,6 +77,10 @@ package_osafi-desktop() {
 	"${pkgdir}/etc/osafi/bspwm/bspwmrc"
     install -Dm 0644 osafi-desktop-sxhkd-config \
 	"${pkgdir}/etc/osafi/sxhkd/sxhkdrc"
+    install -Dm 0644 osafi-desktop-polybar-config \
+	"${pkgdir}/etc/osafi/polybar/config"
+    install -Dm 0755 osafi-desktop-polybar-launcher \
+	"${pkgdir}/etc/osafi/polybar/launcher.sh"
 
     install -Dm 0755 osafi-desktop-rofi-config \
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-rofi.sh"
