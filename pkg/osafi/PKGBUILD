@@ -66,7 +66,7 @@ package_osafi-desktop() {
     xorg-xwd xorg-xwininfo xorg-xwud)
 
     # BSPWM Desktop
-    depends+=(bspwm sxhkd feh rofi nerd-fonts-complete lemonbar-xft-git)
+    depends+=(bspwm sxhkd feh rofi nerd-fonts-complete polybar)
 
     install -Dm 0644 osafi-desktop-wallpaper.png \
 	"${pkgdir}/usr/share/backgrounds/osafi/wallpaper.png"
