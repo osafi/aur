@@ -89,7 +89,7 @@ package_osafi-desktop() {
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/30-osafi-desktop.sh"
 
     # Applications
-    depends+=(google-chrome rxvt-unicode)
+    depends+=(google-chrome rxvt-unicode-patched)
 
     install -Dm 0755 osafi-desktop-urxvt-config \
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-urxvt.sh"
