@@ -14,6 +14,7 @@ source=(
     osafi-desktop-bspwm-config
     osafi-desktop-polybar-config
     osafi-desktop-polybar-launcher
+    osafi-desktop-polybar-script-powermenu
     osafi-desktop-rofi-config
     osafi-desktop-sxhkd-config
     osafi-desktop-urxvt-config
@@ -21,7 +22,7 @@ source=(
     osafi-desktop.sh
 )
 
-sha256sums=(SKIP SKIP SKIP SKIP SKIP SKIP SKIP SKIP SKIP)
+sha256sums=(SKIP SKIP SKIP SKIP SKIP SKIP SKIP SKIP SKIP SKIP)
 
 package_osafi-base() {
     install=osafi-base.install
@@ -79,6 +80,8 @@ package_osafi-desktop() {
 	"${pkgdir}/etc/osafi/sxhkd/sxhkdrc"
     install -Dm 0644 osafi-desktop-polybar-config \
 	"${pkgdir}/etc/osafi/polybar/config"
+    install -Dm 0755 osafi-desktop-polybar-script-powermenu \
+	"${pkgdir}/etc/osafi/polybar/powermenu.sh"
     install -Dm 0755 osafi-desktop-polybar-launcher \
 	"${pkgdir}/etc/osafi/polybar/launcher.sh"
 
