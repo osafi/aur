@@ -60,9 +60,9 @@ blue-gray = #546e7a
 
 [bar/main]
 dpi = 192
-width = 99%
+width = 99.2%
 height = 55
-offset-x = 0.5%
+offset-x = 0.4%
 offset-y = 0.5%
 bottom = false
 fixed-center = false
