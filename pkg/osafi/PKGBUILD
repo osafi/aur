@@ -2,27 +2,12 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=23
+pkgrel=24
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
 license=('MIT')
 groups=(osafi)
-
-source=(
-    osafi-dell-xps-hidpi.sh
-    osafi-desktop-bspwm-config
-    osafi-desktop-polybar-config
-    osafi-desktop-polybar-launcher
-    osafi-desktop-polybar-script-powermenu
-    osafi-desktop-rofi-config
-    osafi-desktop-sxhkd-config
-    osafi-desktop-urxvt-config
-    osafi-desktop-wallpaper.png
-    osafi-desktop.sh
-)
-
-sha256sums=(SKIP SKIP SKIP SKIP SKIP SKIP SKIP SKIP SKIP SKIP)
 
 package_osafi-base() {
     install=osafi-base.install
@@ -71,30 +56,30 @@ package_osafi-desktop() {
     # BSPWM Desktop
     depends+=(bspwm sxhkd feh rofi nerd-fonts-complete polybar)
 
-    install -Dm 0644 osafi-desktop-wallpaper.png \
+    install -Dm 0644 ../osafi-desktop-wallpaper.png \
 	"${pkgdir}/usr/share/backgrounds/osafi/wallpaper.png"
 
-    install -Dm 0755 osafi-desktop-bspwm-config \
+    install -Dm 0755 ../osafi-desktop-bspwm-config \
 	"${pkgdir}/etc/osafi/bspwm/bspwmrc"
-    install -Dm 0644 osafi-desktop-sxhkd-config \
+    install -Dm 0644 ../osafi-desktop-sxhkd-config \
 	"${pkgdir}/etc/osafi/sxhkd/sxhkdrc"
-    install -Dm 0644 osafi-desktop-polybar-config \
+    install -Dm 0644 ../osafi-desktop-polybar-config \
 	"${pkgdir}/etc/osafi/polybar/config"
-    install -Dm 0755 osafi-desktop-polybar-script-powermenu \
+    install -Dm 0755 ../osafi-desktop-polybar-script-powermenu \
 	"${pkgdir}/etc/osafi/polybar/powermenu.sh"
-    install -Dm 0755 osafi-desktop-polybar-launcher \
+    install -Dm 0755 ../osafi-desktop-polybar-launcher \
 	"${pkgdir}/etc/osafi/polybar/launcher.sh"
 
-    install -Dm 0755 osafi-desktop-rofi-config \
+    install -Dm 0755 ../osafi-desktop-rofi-config \
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-rofi.sh"
     
-    install -Dm 0755 osafi-desktop.sh \
+    install -Dm 0755 ../osafi-desktop.sh \
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/30-osafi-desktop.sh"
 
     # Applications
     depends+=(google-chrome rxvt-unicode-patched)
 
-    install -Dm 0755 osafi-desktop-urxvt-config \
+    install -Dm 0755 ../osafi-desktop-urxvt-config \
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-urxvt.sh"
 }
 
@@ -104,6 +89,6 @@ package_osafi-dell-xps() {
     # Touchpad support?
     depends+=(xf86-input-libinput)
 
-    install -Dm 0755 osafi-dell-xps-hidpi.sh \
+    install -Dm 0755 ../osafi-dell-xps-hidpi.sh \
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-hidpi.sh"
 }
