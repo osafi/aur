@@ -56,30 +56,30 @@ package_osafi-desktop() {
     # BSPWM Desktop
     depends+=(bspwm sxhkd feh rofi nerd-fonts-complete polybar)
 
-    install -Dm 0644 ../osafi-desktop-wallpaper.png \
+    install -Dm 0644 ../osafi-desktop/wallpaper.png \
 	"${pkgdir}/usr/share/backgrounds/osafi/wallpaper.png"
 
-    install -Dm 0755 ../osafi-desktop-bspwm-config \
+    install -Dm 0755 ../osafi-desktop/bspwm/bspwmrc \
 	"${pkgdir}/etc/osafi/bspwm/bspwmrc"
-    install -Dm 0644 ../osafi-desktop-sxhkd-config \
+    install -Dm 0644 ../osafi-desktop/sxhkd/sxhkdrc \
 	"${pkgdir}/etc/osafi/sxhkd/sxhkdrc"
-    install -Dm 0644 ../osafi-desktop-polybar-config \
+    install -Dm 0644 ../osafi-desktop/polybar/config \
 	"${pkgdir}/etc/osafi/polybar/config"
-    install -Dm 0755 ../osafi-desktop-polybar-script-powermenu \
+    install -Dm 0755 ../osafi-desktop/polybar/powermenu.sh \
 	"${pkgdir}/etc/osafi/polybar/powermenu.sh"
-    install -Dm 0755 ../osafi-desktop-polybar-launcher \
+    install -Dm 0755 ../osafi-desktop/polybar/launcher.sh \
 	"${pkgdir}/etc/osafi/polybar/launcher.sh"
 
-    install -Dm 0755 ../osafi-desktop-rofi-config \
+    install -Dm 0755 ../osafi-desktop/rofi/20-rofi.sh \
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-rofi.sh"
     
-    install -Dm 0755 ../osafi-desktop.sh \
+    install -Dm 0755 ../osafi-desktop/30-osafi-desktop.sh \
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/30-osafi-desktop.sh"
 
     # Applications
     depends+=(google-chrome rxvt-unicode-patched)
 
-    install -Dm 0755 ../osafi-desktop-urxvt-config \
+    install -Dm 0755 ../osafi-desktop/urxvt/20-urxvt.sh \
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-urxvt.sh"
 }
 
@@ -89,6 +89,6 @@ package_osafi-dell-xps() {
     # Touchpad support?
     depends+=(xf86-input-libinput)
 
-    install -Dm 0755 ../osafi-dell-xps-hidpi.sh \
+    install -Dm 0755 ../osafi-dell-xps/20-hidpi.sh \
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-hidpi.sh"
 }
