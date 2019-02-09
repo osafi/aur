@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=25
+pkgrel=26
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -81,9 +81,6 @@ package_osafi-desktop() {
 
     install -Dm 0755 ../osafi-desktop-urxvt-config \
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-urxvt.sh"
-
-    install -Dm 600 ../osafi-testing.txt \
-	"${pkgdir}/etc/osafi/testing.txt"
 }
 
 package_osafi-dell-xps() {
