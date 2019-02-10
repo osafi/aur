@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=27
+pkgrel=29
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -53,16 +53,23 @@ package_osafi-desktop() {
     xorg-xrandr xorg-xrdb xorg-xrefresh xorg-xset xorg-xsetroot xorg-xvinfo
     xorg-xwd xorg-xwininfo xorg-xwud)
 
-    # BSPWM Desktop
-    depends+=(bspwm sxhkd feh rofi nerd-fonts-complete polybar)
+    # Fonts
+    depends+=(nerd-fonts-complete)
 
-    install -Dm 0644 ../osafi-desktop/wallpaper.png \
-	"${pkgdir}/usr/share/backgrounds/osafi/wallpaper.png"
-
+    # Window manager (BSPWM + SXHKD)
+    depends+=(bspwm sxhkd)
     install -Dm 0755 ../osafi-desktop/bspwm/bspwmrc \
 	"${pkgdir}/etc/osafi/bspwm/bspwmrc"
     install -Dm 0644 ../osafi-desktop/sxhkd/sxhkdrc \
 	"${pkgdir}/etc/osafi/sxhkd/sxhkdrc"
+
+    # Wallpaper
+    depends+=(feh)
+    install -Dm 0644 ../osafi-desktop/wallpaper.png \
+	"${pkgdir}/usr/share/backgrounds/osafi/wallpaper.png"
+
+    # Polybar
+    depends+=(polybar)
     install -Dm 0644 ../osafi-desktop/polybar/config \
 	"${pkgdir}/etc/osafi/polybar/config"
     install -Dm 0755 ../osafi-desktop/polybar/powermenu.sh \
@@ -70,23 +77,28 @@ package_osafi-desktop() {
     install -Dm 0755 ../osafi-desktop/polybar/launcher.sh \
 	"${pkgdir}/etc/osafi/polybar/launcher.sh"
 
+    # Rofi launcher
+    depends+=(rofi)
     install -Dm 0755 ../osafi-desktop/rofi/20-rofi.sh \
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-rofi.sh"
+
+    # Terminal
+    depends+=(rxvt-unicode-patched)
+    install -Dm 0755 ../osafi-desktop/urxvt/20-urxvt.sh \
+	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-urxvt.sh"
     
+    # Xinit to launch window manager 
     install -Dm 0755 ../osafi-desktop/30-osafi-desktop.sh \
 	"${pkgdir}/etc/X11/xinit/xinitrc.d/30-osafi-desktop.sh"
 
-    # Applications
-    depends+=(google-chrome rxvt-unicode-patched)
-
-    install -Dm 0755 ../osafi-desktop/urxvt/20-urxvt.sh \
-	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-urxvt.sh"
+    # General applications
+    depends+=(google-chrome)
 }
 
 package_osafi-dell-xps() {
     depends=(osafi-desktop osafi-devel)
 
-    # Touchpad support?
+    # TODO: Touchpad support?
     depends+=(xf86-input-libinput)
 
     install -Dm 0755 ../osafi-dell-xps/20-hidpi.sh \
