@@ -86,22 +86,20 @@ scroll-down = bspwm-deskprev
 
 ;== Module Location ========================================================
 
-;modules-left = arch workspaces google github reddit youtube
+modules-left = appmenu workspaces google github reddit youtube
 ;modules-right = mpd pkg volume battery network date powermenu
-modules-left = workspaces google github reddit youtube
-modules-right = battery date powermenu
+modules-right = volume battery network date powermenu
  
 ;== Modules ========================================================
 
-;[module/arch]
-;type = custom/text
-;content = 
-;;alt icons = 
-;content-padding = 2
-;content-background = ${color.shade1}
-;content-foreground = ${color.fg}
-;click-left = rmenu_1
-;click-right = rmenu_wi_1
+[module/appmenu]
+type = custom/text
+content = 
+content-padding = 2
+content-background = ${color.shade1}
+content-foreground = ${color.fg}
+click-left = /etc/osafi/polybar/appmenu.sh
+click-right = /etc/osafi/polybar/appmenu_2.sh
 
 [module/workspaces]
 type = internal/xworkspaces
@@ -237,23 +235,27 @@ animation-charging-6 = 
 
 animation-charging-framerate = 750
 
-;[module/volume]
-;type = internal/alsa
-;format-volume = <ramp-volume> <label-volume>
-;format-volume-padding = 2
-;format-volume-background = ${color.shade6}
-;label-volume = %percentage%%
-;label-muted = "婢"
-;label-muted-background = ${color.shade6}
-;label-muted-padding = 2
+[module/volume]
+type = internal/pulseaudio
+sink = alsa_output.pci-0000_00_1f.3.analog-stereo
+use-ui-max = true
+interval = 5
 
-;ramp-volume-0 = 奄
-;ramp-volume-1 = 奄
-;ramp-volume-2 = 奔
-;ramp-volume-3 = 奔
-;ramp-volume-4 = 墳
-;ramp-volume-5 = 墳
-;ramp-volume-6 = 墳
+format-volume = <ramp-volume> <label-volume>
+format-volume-padding = 2
+format-volume-background = ${color.shade6}
+label-volume = %percentage%%
+label-muted = "婢"
+label-muted-background = ${color.shade6}
+label-muted-padding = 2
+
+ramp-volume-0 = 奄
+ramp-volume-1 = 奄
+ramp-volume-2 = 奔
+ramp-volume-3 = 奔
+ramp-volume-4 = 墳
+ramp-volume-5 = 墳
+ramp-volume-6 = 墳
 
 ;[module/network]
 ;type = custom/script
