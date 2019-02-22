@@ -1,15 +1,15 @@
 post_install() {
-    cp /usr/share/xsessions/bspwm.desktop /usr/share/xsessions/bspwm-original.desktop
+    cp /usr/share/xsessions/bspwm.desktop /usr/share/xsessions/bspwm.desktop.original
 
     post_upgrade
 }
 
 post_upgrade() {
-    cp /usr/share/xsessions/bspwm-osafi.desktop /usr/share/xsessions/bspwm.desktop
+    cp /usr/share/xsessions/bspwm.desktop.osafi /usr/share/xsessions/bspwm.desktop
 
     systemctl enable --now lightdm
 }
 
 pre_remove() {
-    cp /usr/share/xsessions/bspwm-original.desktop /usr/share/xsessions/bspwm.desktop
+    cp /usr/share/xsessions/bspwm.desktop.original /usr/share/xsessions/bspwm.desktop
 }
