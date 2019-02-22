@@ -61,7 +61,7 @@ package_osafi-desktop() {
 
     # Window manager (BSPWM + SXHKD)
     depends+=(bspwm sxhkd)
-    install -Dm 0644 ../osafi-desktop/bspwm/bspwm.desktop.osafi \
+    install -Dm 0644 ../osafi-desktop/bspwm/bspwm.desktop \
 	"${pkgdir}/usr/share/xsessions/bspwm.desktop.osafi"
     install -Dm 0755 ../osafi-desktop/bspwm/bspwmrc \
 	"${pkgdir}/etc/osafi/bspwm/bspwmrc"
