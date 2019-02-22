@@ -104,8 +104,8 @@ initrd   /initramfs-linux.img
 options  root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") rw
 EOF
 
-arch-chroot /mnt useradd -mU -s /usr/bin/bash -c $full_name -G wheel,uucp,video,audio,storage,games,input "$user"
-#TODO: arch-chroot /mnt chsh -s /usr/bin/zsh
+arch-chroot /mnt useradd -mU -s /bin/bash -c $full_name -G wheel,uucp,video,audio,storage,games,input "$user"
+#TODO: arch-chroot /mnt chsh -s /bin/zsh
 
 echo "$user:$password" | chpasswd --root /mnt
 echo "root:$password" | chpasswd --root /mnt
