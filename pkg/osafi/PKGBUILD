@@ -106,6 +106,9 @@ package_osafi-desktop() {
 package_osafi-dell-xps() {
     depends=(osafi-desktop osafi-devel)
 
+    # Wifi
+    depends+=(wpa_supplicant)
+
     # TODO: Touchpad support/config?
     depends+=(xf86-input-libinput)
 
