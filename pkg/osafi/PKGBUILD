@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=31
+pkgrel=32
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -107,7 +107,7 @@ package_osafi-dell-xps() {
     depends=(osafi-desktop osafi-devel)
 
     # Wifi
-    depends+=(wpa_supplicant)
+    depends+=(wpa_supplicant netctl)
 
     # TODO: Touchpad support/config?
     depends+=(xf86-input-libinput)
