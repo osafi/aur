@@ -3,7 +3,7 @@
 rofi -modi run,drun \
 	-columns 1 \
 	-drun-icon-theme "Papirus" \
-	-font "Fantasque Sans Mono 10" \
+	-font "SFNS Display 24" \
 	-hide-scrollbar \
 	-line-padding 4 \
 	-lines 10 \
@@ -12,5 +12,5 @@ rofi -modi run,drun \
 	-show drun \
 	-show-icons \
 	-width 25 \
-	-xoffset 28 \
-	-yoffset 60
+	-xoffset 15 \
+	-yoffset 66

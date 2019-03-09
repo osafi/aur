@@ -2,12 +2,12 @@
 
 rofi -modi run,drun,window \
 	-columns 3 \
-	-font "Fantasque Sans Mono 10" \
+	-font "SFNS Display 24" \
 	-lines 10 \
 	-location 1 \
 	-padding 20 \
 	-show drun \
 	-sidebar-mode \
 	-width 50  \
-	-xoffset 28 \
-	-yoffset 60
+	-xoffset 15 \
+	-yoffset 66
