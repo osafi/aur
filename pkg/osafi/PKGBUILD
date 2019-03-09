@@ -60,7 +60,7 @@ package_osafi-desktop() {
     depends+=(pulseaudio)
 
     # TODO: Fonts?
-    depends+=(nerd-fonts-complete)
+    depends+=(nerd-fonts-complete system-san-francisco-font-git)
 
     # Window manager (BSPWM + SXHKD)
     depends+=(bspwm sxhkd)

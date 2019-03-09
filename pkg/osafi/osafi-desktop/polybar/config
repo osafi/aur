@@ -71,10 +71,13 @@ line-size = 2
 background = ${color.bg}
 foreground = ${color.fg}
 
-;==========================================================
+;== Tray ==================================================
+tray-position = right
 
-font-0 = "Fantasque Sans Mono:size=14"
-font-1 = "Iosevka Nerd Font:size=28"
+;== Fonts =================================================
+
+font-0 = "SFNS Display:size=12;4"
+font-1 = "Iosevka Nerd Font:size=12;4"
 
 ;==========================================================
 
@@ -87,7 +90,6 @@ scroll-down = bspwm-deskprev
 ;== Module Location ========================================================
 
 modules-left = appmenu workspaces google github reddit youtube
-;modules-right = mpd pkg volume battery network date powermenu
 modules-right = volume battery network date powermenu
  
 ;== Modules ========================================================
