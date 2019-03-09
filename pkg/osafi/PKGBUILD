@@ -104,10 +104,11 @@ package_osafi-desktop() {
 }
 
 package_osafi-dell-xps() {
+    install=osafi-dell-xps.install
     depends=(osafi-desktop osafi-devel)
 
     # Wifi
-    depends+=(netctl wpa_supplicant)
+    depends+=(networkmanager iw wireless_tools)
 
     # TODO: Touchpad gesture support/config?
     depends+=(xf86-input-libinput)
