@@ -80,10 +80,12 @@ package_osafi-desktop() {
     depends+=(polybar)
     install -Dm 0644 ../osafi-desktop/polybar/config \
 	"${pkgdir}/etc/osafi/polybar/config"
-    install -Dm 0755 ../osafi-desktop/polybar/appmenu.sh \
-	"${pkgdir}/etc/osafi/polybar/appmenu.sh"
-    install -Dm 0755 ../osafi-desktop/polybar/appmenu_2.sh \
-	"${pkgdir}/etc/osafi/polybar/appmenu_2.sh"
+    install -Dm 0644 ../osafi-desktop/polybar/wifi-config \
+	"${pkgdir}/etc/osafi/polybar/wifi-config"
+    install -Dm 0755 ../osafi-desktop/polybar/wifi-menu.sh \
+	"${pkgdir}/etc/osafi/polybar/wifi-menu.sh"
+    install -Dm 0755 ../osafi-desktop/polybar/check-network.sh \
+	"${pkgdir}/etc/osafi/polybar/check-network.sh"
     install -Dm 0755 ../osafi-desktop/polybar/powermenu.sh \
 	"${pkgdir}/etc/osafi/polybar/powermenu.sh"
     install -Dm 0755 ../osafi-desktop/polybar/launcher.sh \

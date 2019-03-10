@@ -89,19 +89,10 @@ scroll-down = bspwm-deskprev
 
 ;== Module Location ========================================================
 
-modules-left = appmenu workspaces google github reddit youtube
+modules-left = workspaces
 modules-right = volume battery network date powermenu
  
 ;== Modules ========================================================
-
-[module/appmenu]
-type = custom/text
-content = 
-content-padding = 2
-content-background = ${color.shade1}
-content-foreground = ${color.fg}
-click-left = /etc/osafi/polybar/appmenu.sh
-click-right = /etc/osafi/polybar/appmenu_2.sh
 
 [module/workspaces]
 type = internal/xworkspaces
@@ -140,34 +131,6 @@ label-active-foreground = ${color.acolor}
 label-urgent-foreground = ${color.curgent}
 label-occupied-foreground = ${color.coccupied}
 
-[module/google]
-type = custom/text
-content = 
-content-padding = 2
-content-foreground = ${color.fg-alt}
-click-left = xdg-open https://www.google.com/ 
-
-[module/github]
-type = custom/text
-content = 
-content-padding = 2
-content-foreground = ${color.fg-alt}
-click-left = xdg-open https://www.github.com/ 
-
-[module/reddit]
-type = custom/text
-content = 
-content-padding = 2
-content-foreground = ${color.fg-alt}
-click-left = xdg-open https://www.reddit.com/
-
-[module/youtube]
-type = custom/text
-content = 
-content-padding = 2
-content-foreground = ${color.fg-alt}
-click-left = xdg-open https://www.youtube.com/
-
 ;==========================================================
 
 ;[module/mpd]
@@ -186,13 +149,6 @@ click-left = xdg-open https://www.youtube.com/
 ;label-song-ellipsis = true
 
 ;==========================================================
-
-;[module/pkg]
-;type = custom/script
-;exec = updates.sh
-;format-background = ${color.shade7}
-;format-padding = 2
-;tail = true
 
 [module/battery]
 type = internal/battery
@@ -259,14 +215,13 @@ ramp-volume-4 = 墳
 ramp-volume-5 = 墳
 ramp-volume-6 = 墳
 
-;[module/network]
-;type = custom/script
-;exec = check-network
-;format-background = ${color.shade4}
-;format-padding = 2
-;click-left = networkmanager_dmenu &
-;click-right = networkmanager_dmenu &
-;tail = true
+[module/network]
+type = custom/script
+exec = /etc/osafi/polybar/check-network.sh
+format-background = ${color.shade4}
+format-padding = 2
+click-left = /etc/osafi/polybar/wifi-menu.sh
+tail = true
 
 [module/date]
 type = internal/date
