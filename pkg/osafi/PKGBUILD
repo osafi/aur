@@ -21,7 +21,7 @@ package_osafi-base() {
     # Explicitly removed from base group: jsfutils nano netctl reiserfsprogs vi xfsprogs
 
     # Extra general packages
-    depends+=(sudo exa dialog unzip vim)
+    depends+=(bc exa dialog openssh sudo unzip vim)
 
     install -Dm 0640 ../osafi-base/sudoers \
 	"${pkgdir}/etc/sudoers.d/osafi-base"
