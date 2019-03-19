@@ -56,7 +56,7 @@ package_osafi-desktop() {
     xorg-xrandr xorg-xrdb xorg-xrefresh xorg-xset xorg-xsetroot xorg-xvinfo
     xorg-xwd xorg-xwininfo xorg-xwud)
 
-    # TODO: Audio?
+    # TODO: Audio? http://nullwise.com/volumeicon.html
     depends+=(pulseaudio)
 
     # TODO: Fonts?
