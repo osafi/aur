@@ -8,6 +8,7 @@ mkdir -p src
 # Environment variables.
 export PACKAGER="https://travis-ci.org/${1}/builds/${2}"
 export AURDEST="$(pwd)/src"
+export AURBIN="$(pwd)/bin"
 
 # Fix for installing cower (pod2man required on path)
 export PATH=/usr/bin/core_perl:$PATH
@@ -32,7 +33,7 @@ mapfile pkgdeps < <(echo ${pkglist[@]} | aur depends --pkgname)
 pkgdeps+=("${pkglist[@]}")
 
 # Remove packages from repository that are no longer in pkglist file
-mkdir -p bin && pushd bin
+mkdir -p $AURBIN && pushd $AURBIN
 while read pkgpackage; do
   repo-remove "${pkgrepo}.db.tar.gz" ${pkgpackage}
 done < <(comm -23 <(pacman -Sl ${pkgrepo} | cut -d" " -f2 | sort) <(printf "%s" "${pkgdeps[@]}" | sort))
@@ -44,6 +45,6 @@ for pkgkey in ${pkgkeys[@]}; do
 done
 
 # Build outdated packages.
-aur sync --database ${pkgrepo} --root "bin" --noconfirm --rmdeps ${pkglist[@]}
+aur sync --database ${pkgrepo} --root "$AURBIN" --noconfirm --rmdeps ${pkglist[@]}
 
 { set +ex; } 2>/dev/null
