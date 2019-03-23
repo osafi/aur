@@ -17,7 +17,7 @@ else
 	echo "WARNING: config file not found! Using default values."
 fi
 
-LIST=$(nmcli --fields "$FIELDS" device wifi list | sed '/^--/d')
+LIST=$(nmcli --fields "$FIELDS" device wifi list | sed '/^--/d' | tail -n +2 | sort -u)
 # For some reason rofi always approximates character width 2 short... hmmm
 RWIDTH=$(($(echo "$LIST" | head -n 1 | awk '{print length($0); }')+2))
 # Dynamically change the height of the rofi menu
@@ -48,7 +48,7 @@ elif [[ "$CONSTATE" =~ "disabled" ]]; then
 	TOGGLE="toggle on"
 fi
 
-eval FIELDSARR=( $(cat ./config | awk 'BEGIN { FS=","; OFS="\n" } /^FIELDS/ { $1 = substr($1, 8); print $0; }') )
+eval FIELDSARR=( $(cat ./wifi-config | awk 'BEGIN { FS=","; OFS="\n" } /^FIELDS/ { $1 = substr($1, 8); print $0; }') )
 
 for i in "${!FIELDSARR[@]}"; do
 	if [[ "${FIELDSARR[$i]}" = "SSID" ]]; then
