@@ -56,6 +56,10 @@ package_osafi-desktop() {
     xorg-xrandr xorg-xrdb xorg-xrefresh xorg-xset xorg-xsetroot xorg-xvinfo
     xorg-xwd xorg-xwininfo xorg-xwud)
 
+    depends+=(xdg-utils)
+
+    # TODO: polkit authentication agent? mate-polkit
+
     # TODO: Audio? http://nullwise.com/volumeicon.html
     depends+=(pulseaudio)
 
