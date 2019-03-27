@@ -20,6 +20,9 @@ package_osafi-base() {
     sysfsutils systemd-sysvcompat tar texinfo usbutils util-linux which)
     # Explicitly removed from base group: jsfutils nano netctl reiserfsprogs vi xfsprogs
 
+    # File systems
+    depends+=(exfat-utils)
+
     # Extra general packages
     depends+=(bc exa dialog openssh sudo unzip vim)
 
