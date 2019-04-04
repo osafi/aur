@@ -21,7 +21,7 @@ package_osafi-base() {
     # Explicitly removed from base group: jsfutils nano netctl reiserfsprogs vi xfsprogs
 
     # File systems
-    depends+=(exfat-utils)
+    depends+=(dosfstools exfat-utils)
 
     # Extra general packages
     depends+=(bc exa dialog openssh sudo unzip vim)
