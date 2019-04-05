@@ -8,7 +8,7 @@ trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 REPO_URL="https://github.com/osafi/aur/releases/download/repository"
 MIRRORLIST_URL="https://www.archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on"
 
-pacman -Sy --noconfirm pacman-contrib
+pacman -Sy --noconfirm archlinux-keyring pacman-contrib
 
 echo "Updating mirror list"
 curl -s "$MIRRORLIST_URL" | \
