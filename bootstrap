@@ -46,14 +46,18 @@ exec 2> >(tee "stderr.log")
 timedatectl set-ntp true
 
 ### Setup the disk and partitions ###
+boot_start=1
+boot_end=$(( 1024 + 1 ))
+
 swap_size=$(free --mebi | awk '/Mem:/ {print $2}')
-swap_end=$(( $swap_size + 129 + 1 ))MiB
+swap_start=$boot_end
+swap_end=$(( $swap_start + $swap_size + 1 ))
 
 parted --script "${device}" -- mklabel gpt \
-  mkpart ESP fat32 1Mib 129MiB \
+  mkpart ESP fat32 ${boot_start}MiB ${boot_end}MiB \
   set 1 boot on \
-  mkpart primary linux-swap 129MiB ${swap_end} \
-  mkpart primary ext4 ${swap_end} 100%
+  mkpart primary linux-swap ${swap_start}MiB ${swap_end}MiB \
+  mkpart primary ext4 ${swap_end}MiB 100%
 
 # Simple globbing was not enough as on one device I needed to match /dev/mmcblk0p1 
 # but not /dev/mmcblk0boot1 while being able to match /dev/sda1 on other devices.
@@ -97,12 +101,31 @@ cat <<EOF > /mnt/boot/loader/loader.conf
 default arch
 EOF
 
+part_root_uuid=$(blkid -s PARTUUID -o value "$part_root")
+
 cat <<EOF > /mnt/boot/loader/entries/arch.conf
 title    Arch Linux
 linux    /vmlinuz-linux
 initrd   /initramfs-linux.img
-options  root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") rw
+options  root=PARTUUID=${part_root_uuid} rw
 EOF
+
+cat <<EOF > /mnt/boot/loader/entries/archiso.conf
+title    Arch Linux UEFI Live CD
+linux    /archiso/boot/x86_64/vmlinuz
+initrd   /archiso/boot/intel_ucode.img
+initrd   /archiso/boot/amd_ucode.img
+initrd   /archiso/boot/x86_64/archiso.img
+options  archisodevice=${part_root_uuid} archisobasedir=archiso archisolabel=ARCH_201904 copytoram
+EOF
+
+# TODO: find a way to get files without redownloading iso?
+curl -L -o archlinux.iso https://mirrors.edge.kernel.org/archlinux/iso/2019.04.01/archlinux-2019.04.01-x86_64.iso
+
+mkdir -p /archiso
+mount -o loop archlinux.iso /archiso
+mkdir -p /mnt/boot/archiso
+rsync -r --info=progress2 /archiso/arch /mnt/boot/archiso
 
 arch-chroot /mnt useradd -mU -s /bin/bash -c "$full_name" -G wheel,uucp,video,audio,storage,games,input "$user"
 #TODO: arch-chroot /mnt chsh -s /bin/zsh
