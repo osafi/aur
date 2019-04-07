@@ -20,6 +20,9 @@ package_osafi-base() {
     sysfsutils systemd-sysvcompat tar texinfo usbutils util-linux which)
     # Explicitly removed from base group: jsfutils nano netctl reiserfsprogs vi xfsprogs
 
+    # Intel microcode
+    depends+=(intel-ucode)
+
     # File systems
     depends+=(dosfstools exfat-utils)
 
