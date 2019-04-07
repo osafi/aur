@@ -126,6 +126,9 @@ mount -o loop /mnt/archlinux.iso /archiso
 mkdir -p /mnt/boot/archiso
 rsync -r --info=progress2 /archiso/arch/ /mnt/boot/archiso
 
+umount /archiso
+rm -rf /mnt/archlinux.iso
+
 arch-chroot /mnt useradd -mU -s /bin/bash -c "$full_name" -G wheel,uucp,video,audio,storage,games,input "$user"
 #TODO: arch-chroot /mnt chsh -s /bin/zsh
 
