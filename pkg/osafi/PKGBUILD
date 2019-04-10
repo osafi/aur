@@ -43,6 +43,9 @@ package_osafi-devel() {
 
     # General tools
     depends+=(git jq)
+
+    # JetBrains tools
+    depends+=(jetbrains-toolbox intellij-idea-ultimate-edition-jre)
 }
 
 package_osafi-desktop() {
