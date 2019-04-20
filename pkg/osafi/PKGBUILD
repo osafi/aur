@@ -24,7 +24,7 @@ package_osafi-base() {
     depends+=(intel-ucode)
 
     # File systems
-    depends+=(dosfstools exfat-utils)
+    depends+=(dosfstools exfat-utils ntfs-3g)
 
     # Extra general packages
     depends+=(bc exa dialog openssh sudo unzip vim)
