@@ -45,7 +45,18 @@ package_osafi-devel() {
     depends+=(git jq)
 
     # JetBrains tools
-    depends+=(jetbrains-toolbox intellij-idea-ultimate-edition-jre)
+    depends+=(
+        jetbrains-toolbox
+        libdbusmenu-glib # global menu support
+    )
+
+    # Java
+    depends+=(
+        gradle
+        openjdk-src
+        jdk-openjdk
+        openjdk-doc
+    )
 }
 
 package_osafi-desktop() {
