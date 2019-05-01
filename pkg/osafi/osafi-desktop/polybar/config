@@ -65,7 +65,7 @@ height = 55
 offset-x = 0.4%
 offset-y = 0.5%
 bottom = false
-fixed-center = false
+fixed-center = true
 line-size = 2
 
 background = ${color.bg}
@@ -90,6 +90,7 @@ scroll-down = bspwm-deskprev
 ;== Module Location ========================================================
 
 modules-left = workspaces
+modules-center = window
 modules-right = volume battery network date powermenu
  
 ;== Modules ========================================================
@@ -130,6 +131,20 @@ label-empty-foreground = ${color.fg}
 label-active-foreground = ${color.acolor}
 label-urgent-foreground = ${color.curgent}
 label-occupied-foreground = ${color.coccupied}
+
+;==========================================================
+
+[module/window]
+type = internal/xwindow
+
+format = <label>
+format-background = ${color.bg}
+format-foreground = #fff
+format-padding = 4
+
+label = %title%
+label-maxlen = 50
+label-empty = Empty
 
 ;==========================================================
 
