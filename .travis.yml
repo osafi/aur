@@ -1,22 +1,15 @@
 language: generic
 services:
   - docker
-before_install:
-  - docker run -d -t --name arch-pkg-builder osafi/arch-pkg-builder bash
-install:
-  - for s in scripts/* ; do docker cp "$s" arch-pkg-builder:/home/builder ; done
 before_script:
-  - docker cp pkglist arch-pkg-builder:/home/builder
-  - docker cp pkgkeys arch-pkg-builder:/home/builder
-  - docker cp pkg arch-pkg-builder:/home/builder
-# TODO: change to using Dockerfile with ADDs to avoid the following line
-  - docker exec arch-pkg-builder sudo chown -R builder:builder /home/builder
+  - docker build --tag arch-builder .
+  - docker run --detach --tty --name arch-builder arch-builder bash
 script:
-  - docker exec arch-pkg-builder bash sync-remote-repo ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
-  - travis_wait 60 docker exec arch-pkg-builder bash build-aur ${TRAVIS_REPO_SLUG} ${TRAVIS_BUILD_ID}
-  - travis_wait 60 docker exec arch-pkg-builder bash build-pkg ${TRAVIS_REPO_SLUG}
+  - docker exec arch-builder bash sync-remote-repo ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
+  - travis_wait 60 docker exec arch-builder bash build-aur ${TRAVIS_REPO_SLUG} ${TRAVIS_BUILD_ID}
+  - travis_wait 60 docker exec arch-builder bash build-pkg ${TRAVIS_REPO_SLUG}
 before_deploy:
-  - docker cp arch-pkg-builder:/home/builder/bin ${TRAVIS_TAG}
+  - docker cp arch-builder:/home/builder/bin ${TRAVIS_TAG}
 deploy:
   provider: releases
   api_key: ${GITHUB_TOKEN}
@@ -27,4 +20,4 @@ deploy:
   on:
     branch: master
 after_deploy:
-  - docker exec arch-pkg-builder python clean-remote-repo ${GITHUB_TOKEN} ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
+  - docker exec arch-builder python clean-remote-repo ${GITHUB_TOKEN} ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
