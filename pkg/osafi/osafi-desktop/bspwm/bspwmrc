@@ -11,8 +11,10 @@ bspc config gapless_monocle      true
 
 bspc rule -a "polybar" layer=above
 
-feh --bg-fill /usr/share/backgrounds/osafi/wallpaper.png
-
 /etc/osafi/polybar/launcher.sh
 nm-applet &
-sxhkd -c /etc/osafi/sxhkd/sxhkdrc &
+
+for i in $(find "/etc/osafi/initrc.d/" -iname "*.sh")
+do
+  source "$i"
+done

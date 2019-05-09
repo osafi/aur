@@ -86,19 +86,25 @@ package_osafi-desktop() {
     # TODO: Fonts?
     depends+=(nerd-fonts-complete system-san-francisco-font-git)
 
-    # Window manager (BSPWM + SXHKD)
+    # Window manager (BSPWM)
     depends+=(bspwm sxhkd)
     install -Dm 0644 ../osafi-desktop/bspwm/bspwm.desktop \
 	"${pkgdir}/usr/share/xsessions/bspwm.desktop.osafi"
     install -Dm 0755 ../osafi-desktop/bspwm/bspwmrc \
 	"${pkgdir}/etc/osafi/bspwm/bspwmrc"
+
+    # Hotkey daemon (SXHKD)
     install -Dm 0644 ../osafi-desktop/sxhkd/sxhkdrc \
 	"${pkgdir}/etc/osafi/sxhkd/sxhkdrc"
+    install -Dm 0744 ../osafi-desktop/sxhkd/10-sxhkd.sh \
+    "${pkgdir}/etc/osafi/xinitrc.d/10-sxhkd.sh"
 
     # Wallpaper
     depends+=(feh)
-    install -Dm 0644 ../osafi-desktop/wallpaper.png \
+    install -Dm 0644 ../osafi-desktop/wallpaper/wallpaper.png \
 	"${pkgdir}/usr/share/backgrounds/osafi/wallpaper.png"
+    install -Dm 0744 ../osafi-desktop/wallpaper/90-wallpaper.sh \
+    "${pkgdir}/etc/osafi/xinitrc.d/90-wallpaper.sh"
 
     # Polybar
     depends+=(polybar)
@@ -137,8 +143,7 @@ package_osafi-dell-xps() {
 	networkmanager
     )
 
-    # TODO: Touchpad gesture support/config?
-    depends+=(xf86-input-libinput)
+    depends+=(libinput-gestures xf86-input-libinput)
     install -Dm 0644 ../osafi-dell-xps/99-xps-libinput.conf \
 	"${pkgdir}/etc/X11/xorg.conf.d/99-xps-libinput.conf"
 
