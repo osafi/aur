@@ -97,14 +97,14 @@ package_osafi-desktop() {
     install -Dm 0644 ../osafi-desktop/sxhkd/sxhkdrc \
 	"${pkgdir}/etc/osafi/sxhkd/sxhkdrc"
     install -Dm 0744 ../osafi-desktop/sxhkd/10-sxhkd.sh \
-    "${pkgdir}/etc/osafi/xinitrc.d/10-sxhkd.sh"
+    "${pkgdir}/etc/osafi/initrc.d/10-sxhkd.sh"
 
     # Wallpaper
     depends+=(feh)
     install -Dm 0644 ../osafi-desktop/wallpaper/wallpaper.png \
 	"${pkgdir}/usr/share/backgrounds/osafi/wallpaper.png"
     install -Dm 0744 ../osafi-desktop/wallpaper/90-wallpaper.sh \
-    "${pkgdir}/etc/osafi/xinitrc.d/90-wallpaper.sh"
+    "${pkgdir}/etc/osafi/initrc.d/90-wallpaper.sh"
 
     # Polybar
     depends+=(polybar)
