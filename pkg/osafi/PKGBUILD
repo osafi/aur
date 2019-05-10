@@ -144,6 +144,10 @@ package_osafi-dell-xps() {
     )
 
     depends+=(libinput-gestures xf86-input-libinput)
+
+    # Touchpad options + gestures support
+    install -Dm 0744 ../osafi-dell-xps/10-libinput-gestures.sh \
+    "${pkgdir}/etc/osafi/initrc.d/10-libinput-gestures.sh"
     install -Dm 0644 ../osafi-dell-xps/99-xps-libinput.conf \
 	"${pkgdir}/etc/X11/xorg.conf.d/99-xps-libinput.conf"
 
