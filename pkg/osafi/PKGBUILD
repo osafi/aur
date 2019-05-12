@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=36
+pkgrel=37
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -86,14 +86,22 @@ package_osafi-desktop() {
     # TODO: Fonts?
     depends+=(nerd-fonts-complete otf-san-francisco)
 
+    # Compositor (Compton)
+    depends+=(compton)
+    install -Dm 0644 ../osafi-desktop/compton/compton.conf \
+	"${pkgdir}/etc/osafi/compton/compton.conf"
+    install -Dm 0744 ../osafi-desktop/compton/10-compton.sh \
+    "${pkgdir}/etc/osafi/initrc.d/10-compton.sh"
+
     # Window manager (BSPWM)
-    depends+=(bspwm sxhkd)
+    depends+=(bspwm)
     install -Dm 0644 ../osafi-desktop/bspwm/bspwm.desktop \
 	"${pkgdir}/usr/share/xsessions/bspwm.desktop.osafi"
     install -Dm 0755 ../osafi-desktop/bspwm/bspwmrc \
 	"${pkgdir}/etc/osafi/bspwm/bspwmrc"
 
     # Hotkey daemon (SXHKD)
+    depends+=(sxhkd)
     install -Dm 0644 ../osafi-desktop/sxhkd/sxhkdrc \
 	"${pkgdir}/etc/osafi/sxhkd/sxhkdrc"
     install -Dm 0744 ../osafi-desktop/sxhkd/10-sxhkd.sh \
@@ -114,18 +122,18 @@ package_osafi-desktop() {
 	"${pkgdir}/etc/osafi/polybar/check-network.sh"
     install -Dm 0755 ../osafi-desktop/polybar/powermenu.sh \
 	"${pkgdir}/etc/osafi/polybar/powermenu.sh"
-    install -Dm 0755 ../osafi-desktop/polybar/10-polybar.sh \
-	"${pkgdir}/etc/osafi/initrc.d/10-polybar.sh"
+    install -Dm 0755 ../osafi-desktop/polybar/20-polybar.sh \
+	"${pkgdir}/etc/osafi/initrc.d/20-polybar.sh"
 
     # Rofi launcher
     depends+=(rofi)
-    install -Dm 0755 ../osafi-desktop/rofi/20-rofi.sh \
-	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-rofi.sh"
+    install -Dm 0755 ../osafi-desktop/rofi/50-rofi.sh \
+	"${pkgdir}/etc/X11/xinit/xinitrc.d/50-rofi.sh"
 
     # Terminal
     depends+=(rxvt-unicode-patched)
-    install -Dm 0755 ../osafi-desktop/urxvt/20-urxvt.sh \
-	"${pkgdir}/etc/X11/xinit/xinitrc.d/20-urxvt.sh"
+    install -Dm 0755 ../osafi-desktop/urxvt/50-urxvt.sh \
+	"${pkgdir}/etc/X11/xinit/xinitrc.d/50-urxvt.sh"
     
     # General applications
     depends+=(google-chrome)
