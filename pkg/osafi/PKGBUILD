@@ -114,7 +114,7 @@ package_osafi-desktop() {
 	"${pkgdir}/etc/osafi/polybar/check-network.sh"
     install -Dm 0755 ../osafi-desktop/polybar/powermenu.sh \
 	"${pkgdir}/etc/osafi/polybar/powermenu.sh"
-    install -Dm 0755 ../osafi-desktop/polybar/launcher.sh \
+    install -Dm 0755 ../osafi-desktop/polybar/10-polybar.sh \
 	"${pkgdir}/etc/osafi/initrc.d/10-polybar.sh"
 
     # Rofi launcher
