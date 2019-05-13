@@ -90,7 +90,7 @@ package_osafi-desktop() {
     depends+=(compton)
     install -Dm 0644 ../osafi-desktop/compton/compton.conf \
 	"${pkgdir}/etc/osafi/compton/compton.conf"
-    install -Dm 0744 ../osafi-desktop/compton/10-compton.sh \
+    install -Dm 0755 ../osafi-desktop/compton/10-compton.sh \
     "${pkgdir}/etc/osafi/initrc.d/10-compton.sh"
 
     # Window manager (BSPWM)
@@ -104,14 +104,14 @@ package_osafi-desktop() {
     depends+=(sxhkd)
     install -Dm 0644 ../osafi-desktop/sxhkd/sxhkdrc \
 	"${pkgdir}/etc/osafi/sxhkd/sxhkdrc"
-    install -Dm 0744 ../osafi-desktop/sxhkd/10-sxhkd.sh \
+    install -Dm 0755 ../osafi-desktop/sxhkd/10-sxhkd.sh \
     "${pkgdir}/etc/osafi/initrc.d/10-sxhkd.sh"
 
     # Wallpaper
     depends+=(feh)
     install -Dm 0644 ../osafi-desktop/wallpaper/wallpaper.jpg \
 	"${pkgdir}/usr/share/backgrounds/osafi/wallpaper.jpg"
-    install -Dm 0744 ../osafi-desktop/wallpaper/90-wallpaper.sh \
+    install -Dm 0755 ../osafi-desktop/wallpaper/90-wallpaper.sh \
     "${pkgdir}/etc/osafi/initrc.d/90-wallpaper.sh"
 
     # Polybar
@@ -154,7 +154,7 @@ package_osafi-dell-xps() {
     depends+=(libinput-gestures xf86-input-libinput)
 
     # Touchpad options + gestures support
-    install -Dm 0744 ../osafi-dell-xps/10-libinput-gestures.sh \
+    install -Dm 0755 ../osafi-dell-xps/10-libinput-gestures.sh \
     "${pkgdir}/etc/osafi/initrc.d/10-libinput-gestures.sh"
     install -Dm 0644 ../osafi-dell-xps/99-xps-libinput.conf \
 	"${pkgdir}/etc/X11/xorg.conf.d/99-xps-libinput.conf"
