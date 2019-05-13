@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=38
+pkgrel=39
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -83,8 +83,8 @@ package_osafi-desktop() {
     # TODO: Audio? http://nullwise.com/volumeicon.html
     depends+=(pulseaudio)
 
-    # TODO: Fonts?
-    depends+=(nerd-fonts-complete otf-san-francisco)
+    # Fonts
+    depends+=(nerd-fonts-complete system-san-francisco-font-git)
 
     # Compositor (Compton)
     depends+=(compton)
