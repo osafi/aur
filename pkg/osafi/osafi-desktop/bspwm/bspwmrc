@@ -15,7 +15,7 @@ bspc rule -a "polybar" layer=above
 
 nm-applet &
 
-for i in $(find "/etc/osafi/initrc.d/" -iname "*.sh")
+for i in $(find "/etc/osafi/wminitrc.d/" -iname "*.sh")
 do
   source "$i"
 done
