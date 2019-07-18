@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=42
+pkgrel=43
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -25,6 +25,9 @@ package_osafi-base() {
 
     # File systems
     depends+=(dosfstools exfat-utils ntfs-3g)
+
+    # Shell
+    depends+=(grml-zsh-config zsh)
 
     # Extra general packages
     depends+=(bc exa dialog openssh sudo unzip vim)
@@ -56,6 +59,13 @@ package_osafi-devel() {
         openjdk-src
         jdk-openjdk
         openjdk-doc
+    )
+
+    # Node
+    depends+=(
+        npm
+        nodejs
+        yarn
     )
 }
 
@@ -133,9 +143,9 @@ package_osafi-desktop() {
 	"${pkgdir}/etc/osafi/wminitrc.d/90-rofi.sh"
 
     # Terminal
-    depends+=(rxvt-unicode-patched)
-    install -Dm 0755 ../osafi-desktop/urxvt/urxvt.sh \
-	"${pkgdir}/etc/osafi/wminitrc.d/90-urxvt.sh"
+    depends+=(alacritty)
+    # install -Dm 0755 ../osafi-desktop/urxvt/urxvt.sh \
+	# "${pkgdir}/etc/osafi/wminitrc.d/90-urxvt.sh"
     
     # General applications
     depends+=(google-chrome)

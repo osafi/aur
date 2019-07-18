@@ -130,8 +130,9 @@ rsync -r --info=progress2 /archiso/arch/ /mnt/boot/archiso
 umount /archiso
 rm -rf /mnt/archlinux.iso
 
-arch-chroot /mnt useradd -mU -s /bin/bash -c "$full_name" -G wheel,uucp,video,audio,storage,games,input "$user"
-#TODO: arch-chroot /mnt chsh -s /bin/zsh
+arch-chroot /mnt useradd -mU -s /bin/zsh -c "$full_name" -G wheel,uucp,video,audio,storage,games,input "$user"
 
 echo "$user:$password" | chpasswd --root /mnt
 echo "root:$password" | chpasswd --root /mnt
+
+arch-chroot /mnt chsh -s /bin/zsh
