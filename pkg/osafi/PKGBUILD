@@ -143,9 +143,9 @@ package_osafi-desktop() {
 	"${pkgdir}/etc/osafi/wminitrc.d/90-rofi.sh"
 
     # Terminal
-    depends+=(alacritty)
-    # install -Dm 0755 ../osafi-desktop/urxvt/urxvt.sh \
-	# "${pkgdir}/etc/osafi/wminitrc.d/90-urxvt.sh"
+    depends+=(termite)
+    install -Dm 0644 ../osafi-desktop/termite/termite.cfg \
+    "${pkgdir}/etc/xdg/termite.cfg"
     
     # General applications
     depends+=(google-chrome)
