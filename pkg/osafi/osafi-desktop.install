@@ -6,10 +6,12 @@ post_install() {
 
 post_upgrade() {
     cp /usr/share/xsessions/bspwm.desktop.osafi /usr/share/xsessions/bspwm.desktop
+    ln --force --symbolic /usr/bin/google-chrome-stable /usr/bin/google-chrome
 
     systemctl enable --now lightdm
 }
 
 pre_remove() {
     cp /usr/share/xsessions/bspwm.desktop.original /usr/share/xsessions/bspwm.desktop
+    rm --force /usr/bin/google-chrome
 }
