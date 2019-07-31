@@ -59,8 +59,6 @@ parted --script "${device}" -- mklabel gpt \
   mkpart primary linux-swap ${swap_start}MiB ${swap_end}MiB \
   mkpart primary ext4 ${swap_end}MiB 100%
 
-# Simple globbing was not enough as on one device I needed to match /dev/mmcblk0p1 
-# but not /dev/mmcblk0boot1 while being able to match /dev/sda1 on other devices.
 part_boot="$(ls ${device}* | grep -E "^${device}p?1$")"
 part_swap="$(ls ${device}* | grep -E "^${device}p?2$")"
 part_root="$(ls ${device}* | grep -E "^${device}p?3$")"
@@ -118,14 +116,7 @@ initrd   /archiso/boot/x86_64/archiso.img
 options  archisodevice=${part_boot} archisobasedir=archiso archisolabel=ARCH_201904 copytoram
 EOF
 
-# TODO: find a way to get files without redownloading iso?
-#curl -L -o /mnt/archlinux.iso https://mirrors.edge.kernel.org/archlinux/iso/2019.04.01/archlinux-2019.04.01-x86_64.iso
-curl -L -o /mnt/archlinux.iso http://192.168.1.10/archlinux.iso
-
-mkdir -p /archiso
-mount -o loop /mnt/archlinux.iso /archiso
-mkdir -p /mnt/boot/archiso
-rsync -r --info=progress2 /archiso/arch/ /mnt/boot/archiso
+rsync -r --info=progress2 /run/archiso/bootmnt/arch/ /mnt/boot/archiso
 
 umount /archiso
 rm -rf /mnt/archlinux.iso
