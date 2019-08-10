@@ -122,9 +122,6 @@ EOF
 
 rsync -r --info=progress2 /run/archiso/bootmnt/arch/ /mnt/boot/archiso
 
-umount /archiso
-rm -rf /mnt/archlinux.iso
-
 arch-chroot /mnt useradd -mU -s /bin/zsh -c "$full_name" -G wheel,uucp,video,audio,storage,games,input "$user"
 
 echo "$user:$password" | chpasswd --root /mnt
