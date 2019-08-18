@@ -5,19 +5,9 @@
 set -uo pipefail
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
-REPO_URL="https://github.com/osafi/aur/releases/download/repository"
-MIRRORLIST_URL="https://www.archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on"
-
-# Update keyring for pacman
-pacman -Sy --noconfirm archlinux-keyring
-
-# Install pacman-contrib for the 'rankmirrors' command
-pacman -Sy --noconfirm pacman-contrib
-
-echo "Updating mirror list"
-curl -s "$MIRRORLIST_URL" | \
-    sed -e 's/^#Server/Server/' -e '/^#/d' | \
-    rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
+### Set up logging ###
+exec 1> >(tee "stdout.log")
+exec 2> >(tee "stderr.log")
 
 ### Get infomation from user ###
 hostname=$(dialog --stdout --inputbox "Enter hostname" 0 0) || exit 1
@@ -40,44 +30,65 @@ clear
 [[ "$password" == "$password2" ]] || ( echo "Passwords did not match"; exit 1; )
 
 devicelist=$(lsblk -dplnx size -o name,size | grep -Ev "boot|rpmb|loop" | tac)
-device=$(dialog --stdout --menu "Select installtion disk" 0 0 0 ${devicelist}) || exit 1
+device=$(dialog --stdout --menu "Select installation disk" 0 0 0 ${devicelist}) || exit 1
 clear
 
-### Set up logging ###
-exec 1> >(tee "stdout.log")
-exec 2> >(tee "stderr.log")
+REPO_URL="https://github.com/osafi/aur/releases/download/repository"
+MIRRORLIST_URL="https://www.archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on"
 
 timedatectl set-ntp true
 
+# Update keyring for pacman
+pacman -Sy --noconfirm archlinux-keyring
+
+# Install pacman-contrib for the 'rankmirrors' command
+pacman -Sy --noconfirm pacman-contrib
+
+echo "Updating mirror list"
+curl -s "$MIRRORLIST_URL" | \
+    sed -e 's/^#Server/Server/' -e '/^#/d' | \
+    rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
+
 ### Setup the disk and partitions ###
-boot_start=1
-boot_end=$(( 1024 + 1 ))
+reco_start=1
+reco_end=$(( $reco_start + 1024 ))
+
+boot_start=$reco_end
+boot_end=$(( $boot_start + 128 ))
 
 swap_size=$(free --mebi | awk '/Mem:/ {print $2}')
 swap_start=$boot_end
-swap_end=$(( $swap_start + $swap_size + 1 ))
+swap_end=$(( $swap_start + $swap_size ))
+
+root_start=${swap_end}
 
 parted --script "${device}" -- mklabel gpt \
+  mkpart primary ext4 ${reco_start}MiB ${reco_end}MiB \
   mkpart ESP fat32 ${boot_start}MiB ${boot_end}MiB \
-  set 1 boot on \
+  set 2 boot on \
   mkpart primary linux-swap ${swap_start}MiB ${swap_end}MiB \
-  mkpart primary ext4 ${swap_end}MiB 100%
+  mkpart primary ext4 ${root_start}MiB 100%
 
-part_boot="$(ls ${device}* | grep -E "^${device}p?1$")"
-part_swap="$(ls ${device}* | grep -E "^${device}p?2$")"
-part_root="$(ls ${device}* | grep -E "^${device}p?3$")"
+part_reco="$(ls ${device}* | grep -E "^${device}p?1$")"
+part_boot="$(ls ${device}* | grep -E "^${device}p?2$")"
+part_swap="$(ls ${device}* | grep -E "^${device}p?3$")"
+part_root="$(ls ${device}* | grep -E "^${device}p?4$")"
 
+wipefs "${part_reco}"
 wipefs "${part_boot}"
 wipefs "${part_swap}"
 wipefs "${part_root}"
 
+mkfs.ext4 "${part_reco}"
 mkfs.vfat -F32 "${part_boot}"
 mkswap "${part_swap}"
 mkfs.f2fs -f "${part_root}"
 
 swapon "${part_swap}"
+mkdir -p /recovery
+mount "${part_reco}" /recovery
 mount "${part_root}" /mnt
-mkdir /mnt/boot
+mkdir -p /mnt/boot
 mount "${part_boot}" /mnt/boot
 
 ### Install and configure the basic system ###
@@ -87,8 +98,10 @@ SigLevel = Optional TrustAll
 Server = $REPO_URL
 EOF
 
-pacstrap /mnt osafi-dell-xps refind-efi parted
+pacstrap /mnt osafi-dell-xps
+
 genfstab -t PARTUUID /mnt >> /mnt/etc/fstab
+
 echo "${hostname}" > /mnt/etc/hostname
 
 cat >>/mnt/etc/pacman.conf <<EOF
@@ -97,30 +110,27 @@ SigLevel = Optional TrustAll
 Server = $REPO_URL
 EOF
 
-# --usedefault flag added for running in virtualbox (https://wiki.archlinux.org/index.php/REFInd#VirtualBox)
-arch-chroot /mnt refind-install --usedefault ${part_boot}
+part_reco_uuid=$(blkid -s UUID -o value "$part_reco")
 
-cat <<EOF > /mnt/boot/EFI/BOOT/refind.conf
-timeout 20
+cat >>/mnt/etc/grub.d/40_archiso <<EOF
+#!/bin/sh
+exec tail -n +3 \$0
 
-menuentry "Arch Linux" {
-  icon    /EFI/BOOT/icons/os_arch.png
-  loader  /vmlinuz-linux
-  initrd  /initramfs-linux.img
-  options "root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") initrd=/intel-ucode.img quiet splash"
+search --no-floppy --set=isopart --fs-uuid $part_reco_uuid
+
+menuentry 'ArchLinux Live CD' {
+  set imgdevpath='/dev/disk/by-uuid/$part_reco_uuid'
+  set isofile='/archlinux.iso'
+  loopback loop (\$isopart)\$isofile
+  linux (loop)/arch/boot/x86_64/vmlinuz archisodevice=/dev/loop0 img_dev=\$imgdevpath img_loop=\$isofile earlymodules=loop copytoram
+  initrd (loop)/arch/boot/x86_64/archiso.img
 }
 EOF
+arch-chroot /mnt chmod +x /etc/grub.d/40_archiso
+arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --removable
+arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 
-# cat <<EOF > /mnt/boot/loader/entries/archiso.conf
-# title    Arch Linux UEFI Live CD
-# linux    /archiso/boot/x86_64/vmlinuz
-# initrd   /archiso/boot/intel_ucode.img
-# initrd   /archiso/boot/amd_ucode.img
-# initrd   /archiso/boot/x86_64/archiso.img
-# options  archisodevice=${part_boot} archisobasedir=archiso archisolabel=ARCH_201904 copytoram
-# EOF
-
-# rsync -r --info=progress2 /run/archiso/bootmnt/arch/ /mnt/boot/archiso
+curl -L -o /recovery/archlinux.iso http://192.168.0.143:1234/archlinux.iso
 
 arch-chroot /mnt useradd -mU -s /bin/zsh -c "$full_name" -G wheel,uucp,video,audio,storage,games,input "$user"
 
@@ -128,3 +138,6 @@ echo "$user:$password" | chpasswd --root /mnt
 echo "root:$password" | chpasswd --root /mnt
 
 arch-chroot /mnt chsh -s /bin/zsh
+
+umount /recovery
+umount -R /mnt
