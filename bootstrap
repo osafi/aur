@@ -130,7 +130,7 @@ arch-chroot /mnt chmod +x /etc/grub.d/40_archiso
 arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB --removable
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
 
-curl -L -o /recovery/archlinux.iso http://192.168.0.143:1234/archlinux.iso
+curl -L -o /recovery/archlinux.iso https://latest-archlinux.cfapps.io/iso?region=united_states
 
 arch-chroot /mnt useradd -mU -s /bin/zsh -c "$full_name" -G wheel,uucp,video,audio,storage,games,input "$user"
 
