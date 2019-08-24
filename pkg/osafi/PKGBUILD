@@ -33,7 +33,16 @@ package_osafi-base() {
     depends+=(grml-zsh-config zsh)
 
     # Extra general packages
-    depends+=(bc exa dialog openssh sudo unzip vim)
+    depends+=(
+        bc
+        dialog
+        exa
+        nordvpn-bin
+        openssh
+        sudo
+        unzip
+        vim
+    )
 
     install -Dm 0640 ../osafi-base/sudoers \
 	"${pkgdir}/etc/sudoers.d/osafi-base"
@@ -79,7 +88,7 @@ package_osafi-desktop() {
     # Login manager + locker
     depends+=(light-locker lightdm-webkit-theme-aether xorg-server)
     install -Dm 0755 ../osafi-desktop/lightdm/locker.sh \
-    "${pkgdir}/etc/osafi/wminitrc.d/10-locker.sh"
+        "${pkgdir}/etc/osafi/wminitrc.d/10-locker.sh"
 
     # Xorg packages and utilities
     depends+=(xorg-xsetroot xorg-xkill xorg-xbacklight xorg-bdftopcf
@@ -106,7 +115,7 @@ package_osafi-desktop() {
     install -Dm 0644 ../osafi-desktop/compton/compton.conf \
 	"${pkgdir}/etc/osafi/compton/compton.conf"
     install -Dm 0755 ../osafi-desktop/compton/compton.sh \
-    "${pkgdir}/etc/osafi/wminitrc.d/10-compton.sh"
+        "${pkgdir}/etc/osafi/wminitrc.d/10-compton.sh"
 
     # Window manager (BSPWM)
     depends+=(bspwm)
@@ -120,14 +129,14 @@ package_osafi-desktop() {
     install -Dm 0644 ../osafi-desktop/sxhkd/sxhkdrc \
 	"${pkgdir}/etc/osafi/sxhkd/sxhkdrc"
     install -Dm 0755 ../osafi-desktop/sxhkd/sxhkd.sh \
-    "${pkgdir}/etc/osafi/wminitrc.d/10-sxhkd.sh"
+        "${pkgdir}/etc/osafi/wminitrc.d/10-sxhkd.sh"
 
     # Wallpaper
     depends+=(feh)
     install -Dm 0644 ../osafi-desktop/wallpaper/wallpaper.jpg \
 	"${pkgdir}/usr/share/backgrounds/osafi/wallpaper.jpg"
     install -Dm 0755 ../osafi-desktop/wallpaper/wallpaper.sh \
-    "${pkgdir}/etc/osafi/wminitrc.d/20-wallpaper.sh"
+        "${pkgdir}/etc/osafi/wminitrc.d/20-wallpaper.sh"
 
     # Polybar
     depends+=(polybar)
@@ -172,7 +181,7 @@ package_osafi-dell-xps() {
     # Touchpad options + gestures support
     depends+=(libinput-gestures xf86-input-libinput)
     install -Dm 0755 ../osafi-dell-xps/libinput-gestures.sh \
-    "${pkgdir}/etc/osafi/wminitrc.d/90-libinput-gestures.sh"
+        "${pkgdir}/etc/osafi/wminitrc.d/90-libinput-gestures.sh"
     install -Dm 0644 ../osafi-dell-xps/xps-libinput.conf \
 	"${pkgdir}/etc/X11/xorg.conf.d/99-xps-libinput.conf"
 
