@@ -9,4 +9,5 @@ post_upgrade() {
     locale-gen
 
     systemctl enable --now nordvpnd
+    systemctl enable --now docker
 }

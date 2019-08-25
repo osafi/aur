@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=bspwm
+Name=bspwm-osafi
 Comment=Binary space partitioning window manager
 Exec=bspwm -c /etc/osafi/bspwm/bspwmrc 2> ~/.bspwm.err > ~/.bspwm.out
 Type=Application
