@@ -16,23 +16,13 @@ trans = #00000000
 white = #FFFFFF
 black = #000000
 
-bg = #1F1F1F
+bg = #AA1F1F1F
 fg = #FFFFFF
 fg-alt = #A9ABB0
 
 acolor = #FFFFFF
 curgent = #EF5350
 coccupied = #42A5F5
-
-shade1 = #4A148C
-shade2 = #6A1B9A
-shade3 = #7B1FA2
-shade4 = #8E24AA
-shade5 = #9C27B0
-shade6 = #AB47BC
-shade7 = #BA68C8
-shade8 = #CE93D8
-ashade8 = #2C2C2C
 
 ## Material Colors
 
@@ -60,10 +50,10 @@ blue-gray = #546e7a
 
 [bar/main]
 dpi = 192
-width = 99.2%
+;width = 99.2%
 height = 55
-offset-x = 0.4%
-offset-y = 0.5%
+;offset-x = 0.4%
+;offset-y = 0.5%
 bottom = false
 fixed-center = true
 line-size = 2
@@ -72,7 +62,7 @@ background = ${color.bg}
 foreground = ${color.fg}
 
 ;== Tray ==================================================
-tray-position = right
+;tray-position = right
 
 ;== Fonts =================================================
 
@@ -116,7 +106,7 @@ format-padding = 1
 icon-default = 
 
 format = <label-state>
-format-background = ${color.shade2}
+;format-background = ${color.bg}
 label-active = 
 label-occupied = 
 label-urgent = 
@@ -148,23 +138,6 @@ label-empty = Empty
 
 ;==========================================================
 
-;[module/mpd]
-;type = internal/mpd
-;format-online = <toggle> <label-song> 
-;;format-online =  <label-song> 
-;;alt icons =   
-;format-online-foreground = ${color.ashade8}
-;format-online-background = ${color.shade8}
-;format-online-padding = 2
-
-;icon-play = 喇
-;icon-pause = 
-
-;label-song-maxlen = 25
-;label-song-ellipsis = true
-
-;==========================================================
-
 [module/battery]
 type = internal/battery
 full-at = 99
@@ -172,11 +145,11 @@ time-format = %H:%M
 battery = BAT0
 adapter = AC
 format-charging = <animation-charging> <label-charging>
-format-charging-background = ${color.shade5}
+format-charging-background = ${color.bg}
 format-charging-padding = 2
 label-charging = %percentage%%
 format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-background = ${color.shade5}
+format-discharging-background = ${color.bg}
 format-discharging-padding = 2
 label-discharging = %percentage%%
 format-full = <label-full>
@@ -208,6 +181,8 @@ animation-charging-6 = 
 
 animation-charging-framerate = 750
 
+;==========================================================
+
 [module/volume]
 type = internal/pulseaudio
 sink = alsa_output.pci-0000_00_1f.3.analog-stereo
@@ -216,10 +191,10 @@ interval = 5
 
 format-volume = <ramp-volume> <label-volume>
 format-volume-padding = 2
-format-volume-background = ${color.shade6}
+format-volume-background = ${color.bg}
 label-volume = %percentage%%
 label-muted = "婢"
-label-muted-background = ${color.shade6}
+label-muted-background = ${color.bg}
 label-muted-padding = 2
 
 ramp-volume-0 = 奄
@@ -230,28 +205,34 @@ ramp-volume-4 = 墳
 ramp-volume-5 = 墳
 ramp-volume-6 = 墳
 
+;==========================================================
+
 [module/network]
 type = custom/script
 exec = /etc/osafi/polybar/check-network.sh
-format-background = ${color.shade4}
+format-background = ${color.bg}
 format-padding = 2
 click-left = /etc/osafi/polybar/wifi-menu.sh
 tail = true
+
+;==========================================================
 
 [module/date]
 type = internal/date
 interval = 30
 label =  %time%
 label-padding = 2
-label-background = ${color.shade3}
+label-background = ${color.bg}
 time =  %I:%M %p
 time-alt =  %Y-%m-%d
+
+;==========================================================
 
 [module/powermenu]
 type = custom/text
 content = 襤
 content-padding = 2
-content-background = ${color.shade2}
+content-background = ${color.bg}
 content-foreground = ${color.fg}
 click-left = /etc/osafi/polybar/powermenu.sh
 click-right = /etc/osafi/polybar/powermenu.sh
