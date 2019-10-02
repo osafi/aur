@@ -120,6 +120,14 @@ super + alt + shift + {h,j,k,l}
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
+
+
 # Brightness
 XF86MonBrightness{Up,Down}
-        light -{A,U} 5
+	light -{A,U} 5
+
+# Volume
+XF86Audio{Lower,Raise}Volume
+	pulsemixer --change-volume {-,+}5
+XF86AudioMute
+	pulsemixer --toggle-mute
