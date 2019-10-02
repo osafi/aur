@@ -81,7 +81,7 @@ scroll-down = bspwm-deskprev
 
 modules-left = workspaces
 modules-center = window
-modules-right = volume battery network date powermenu
+modules-right = backlight volume battery network date powermenu
  
 ;== Modules ========================================================
 
@@ -121,6 +121,21 @@ label-empty-foreground = ${color.fg}
 label-active-foreground = ${color.acolor}
 label-urgent-foreground = ${color.curgent}
 label-occupied-foreground = ${color.coccupied}
+
+;==========================================================
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+
+format = 🔆 <label>
+
+;ramp-0 = 🌕
+;ramp-1 = 🌔
+;ramp-2 = 🌓
+;ramp-3 = 🌒
+;ramp-4 = 🌑
+
 
 ;==========================================================
 
