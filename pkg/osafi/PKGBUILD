@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=47
+pkgrel=48
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -62,6 +62,7 @@ package_osafi-devel() {
 
     # JetBrains tools
     depends+=(
+        intellij-idea-ultimate-edition
         jetbrains-toolbox
         libdbusmenu-glib # global menu support
     )
@@ -86,39 +87,47 @@ package_osafi-desktop() {
     install=osafi-desktop.install
     depends=(osafi-base)
 
-    # Login manager + locker
+    # Login manager + Locker
     depends+=(light-locker lightdm-webkit-theme-aether xorg-server)
     install -Dm 0644 ../osafi-desktop/lightdm/10-osafi.conf \
         "${pkgdir}/etc/lightdm/lightdm.conf.d/10-osafi.conf"
     install -Dm 0755 ../osafi-desktop/lightdm/locker.sh \
         "${pkgdir}/etc/osafi/wminitrc.d/10-locker.sh"
 
-    # Xorg packages and utilities
-    depends+=(xorg-xsetroot xorg-xkill xorg-xbacklight xorg-bdftopcf
-    xorg-iceauth xorg-luit xorg-mkfontdir xorg-mkfontscale xorg-sessreg
-    xorg-setxkbmap xorg-smproxy xorg-x11perf xorg-xauth xorg-xbacklight
-    xorg-xcmsdb xorg-xcursorgen xorg-xdpyinfo xorg-xdriinfo xorg-xev
-    xorg-xgamma xorg-xhost xorg-xinput xorg-xkbcomp xorg-xkbevd xorg-xkbutils
-    xorg-xkill xorg-xlsatoms xorg-xlsclients xorg-xmodmap xorg-xpr xorg-xprop
-    xorg-xrandr xorg-xrdb xorg-xrefresh xorg-xset xorg-xsetroot xorg-xvinfo
-    xorg-xwd xorg-xwininfo xorg-xwud)
+    # Plasma
+    depends+=(
+        kde-applications
+        plasma
+        plasma-wayland-session
+    )
 
-    depends+=(xdg-utils)
+    # Xorg packages and utilities
+    # depends+=(xorg-xsetroot xorg-xkill xorg-xbacklight xorg-bdftopcf
+    # xorg-iceauth xorg-luit xorg-mkfontdir xorg-mkfontscale xorg-sessreg
+    # xorg-setxkbmap xorg-smproxy xorg-x11perf xorg-xauth xorg-xbacklight
+    # xorg-xcmsdb xorg-xcursorgen xorg-xdpyinfo xorg-xdriinfo xorg-xev
+    # xorg-xgamma xorg-xhost xorg-xinput xorg-xkbcomp xorg-xkbevd xorg-xkbutils
+    # xorg-xkill xorg-xlsatoms xorg-xlsclients xorg-xmodmap xorg-xpr xorg-xprop
+    # xorg-xrandr xorg-xrdb xorg-xrefresh xorg-xset xorg-xsetroot xorg-xvinfo
+    # xorg-xwd xorg-xwininfo xorg-xwud)
+
+    # XDG Utils such as xdg-open
+    # depends+=(xdg-utils)
 
     # TODO: polkit authentication agent? mate-polkit
 
     # TODO: Audio? http://nullwise.com/volumeicon.html
-    depends+=(pulseaudio)
+    # depends+=(pulseaudio)
 
     # Fonts
-    depends+=(nerd-fonts-complete system-san-francisco-font-git)
+    # depends+=(nerd-fonts-complete system-san-francisco-font-git)
 
     # Compositor (Compton)
-    depends+=(compton)
-    install -Dm 0644 ../osafi-desktop/compton/compton.conf \
-        "${pkgdir}/etc/osafi/compton/compton.conf"
-    install -Dm 0755 ../osafi-desktop/compton/compton.sh \
-        "${pkgdir}/etc/osafi/wminitrc.d/10-compton.sh"
+    # depends+=(compton)
+    # install -Dm 0644 ../osafi-desktop/compton/compton.conf \
+    #     "${pkgdir}/etc/osafi/compton/compton.conf"
+    # install -Dm 0755 ../osafi-desktop/compton/compton.sh \
+    #     "${pkgdir}/etc/osafi/wminitrc.d/10-compton.sh"
 
     # Window manager (BSPWM)
     depends+=(bspwm)
@@ -135,27 +144,27 @@ package_osafi-desktop() {
         "${pkgdir}/etc/osafi/wminitrc.d/10-sxhkd.sh"
 
     # Wallpaper
-    depends+=(feh)
-    install -Dm 0644 ../osafi-desktop/wallpaper/wallpaper.jpg \
-        "${pkgdir}/usr/share/backgrounds/osafi/wallpaper.jpg"
-    install -Dm 0755 ../osafi-desktop/wallpaper/wallpaper.sh \
-        "${pkgdir}/etc/osafi/wminitrc.d/20-wallpaper.sh"
+    # depends+=(feh)
+    # install -Dm 0644 ../osafi-desktop/wallpaper/wallpaper.jpg \
+    #     "${pkgdir}/usr/share/backgrounds/osafi/wallpaper.jpg"
+    # install -Dm 0755 ../osafi-desktop/wallpaper/wallpaper.sh \
+    #     "${pkgdir}/etc/osafi/wminitrc.d/20-wallpaper.sh"
 
     # Polybar
-    depends+=(polybar-git)
-    install -Dm 0644 ../osafi-desktop/polybar/config \
-        "${pkgdir}/etc/osafi/polybar/config"
-    install -Dm 0755 ../osafi-desktop/polybar/check-network.sh \
-        "${pkgdir}/etc/osafi/polybar/check-network.sh"
-    install -Dm 0755 ../osafi-desktop/polybar/powermenu.sh \
-        "${pkgdir}/etc/osafi/polybar/powermenu.sh"
-    install -Dm 0755 ../osafi-desktop/polybar/polybar.sh \
-        "${pkgdir}/etc/osafi/wminitrc.d/30-polybar.sh"
+    # depends+=(polybar-git)
+    # install -Dm 0644 ../osafi-desktop/polybar/config \
+    #     "${pkgdir}/etc/osafi/polybar/config"
+    # install -Dm 0755 ../osafi-desktop/polybar/check-network.sh \
+    #     "${pkgdir}/etc/osafi/polybar/check-network.sh"
+    # install -Dm 0755 ../osafi-desktop/polybar/powermenu.sh \
+    #     "${pkgdir}/etc/osafi/polybar/powermenu.sh"
+    # install -Dm 0755 ../osafi-desktop/polybar/polybar.sh \
+    #     "${pkgdir}/etc/osafi/wminitrc.d/30-polybar.sh"
 
     # Rofi launcher
-    depends+=(rofi)
-    install -Dm 0755 ../osafi-desktop/rofi/rofi.sh \
-        "${pkgdir}/etc/osafi/wminitrc.d/90-rofi.sh"
+    # depends+=(rofi)
+    # install -Dm 0755 ../osafi-desktop/rofi/rofi.sh \
+    #     "${pkgdir}/etc/osafi/wminitrc.d/90-rofi.sh"
 
     # Terminal
     depends+=(termite)
@@ -171,22 +180,22 @@ package_osafi-dell-xps() {
     depends=(osafi-desktop osafi-devel)
 
     # Wifi
-    depends+=(
-        iw
-        network-manager-applet
-        wireless_tools
-        networkmanager
-    )
+    # depends+=(
+    #     iw
+    #     network-manager-applet
+    #     wireless_tools
+    #     networkmanager
+    # )
 
     # Backlight
-    depends+=(light)
+    # depends+=(light)
 
     # Touchpad options + gestures support
-    depends+=(libinput-gestures xf86-input-libinput)
-    install -Dm 0755 ../osafi-dell-xps/libinput-gestures.sh \
-        "${pkgdir}/etc/osafi/wminitrc.d/90-libinput-gestures.sh"
-    install -Dm 0644 ../osafi-dell-xps/xps-libinput.conf \
-        "${pkgdir}/etc/X11/xorg.conf.d/99-xps-libinput.conf"
+    # depends+=(libinput-gestures xf86-input-libinput)
+    # install -Dm 0755 ../osafi-dell-xps/libinput-gestures.sh \
+    #     "${pkgdir}/etc/osafi/wminitrc.d/90-libinput-gestures.sh"
+    # install -Dm 0644 ../osafi-dell-xps/xps-libinput.conf \
+    #     "${pkgdir}/etc/X11/xorg.conf.d/99-xps-libinput.conf"
 
     # Set hidpi
     install -Dm 0755 ../osafi-dell-xps/hidpi.sh \
