@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=48
+pkgrel=52
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -58,7 +58,11 @@ package_osafi-devel() {
     sed sudo systemd texinfo util-linux which)
 
     # General tools
-    depends+=(git jq)
+    depends+=(
+        code
+        git
+        jq
+    )
 
     # JetBrains tools
     depends+=(
@@ -94,7 +98,7 @@ package_osafi-desktop() {
     install -Dm 0755 ../osafi-desktop/lightdm/locker.sh \
         "${pkgdir}/etc/osafi/wminitrc.d/10-locker.sh"
 
-    # Plasma group + wayland session
+    # Plasma group
     depends+=(
         bluedevil
         breeze
@@ -310,26 +314,24 @@ package_osafi-desktop() {
         zeroconf-ioslave
     )
 
-    # Xorg packages and utilities
-    # depends+=(xorg-xsetroot xorg-xkill xorg-xbacklight xorg-bdftopcf
-    # xorg-iceauth xorg-luit xorg-mkfontdir xorg-mkfontscale xorg-sessreg
-    # xorg-setxkbmap xorg-smproxy xorg-x11perf xorg-xauth xorg-xbacklight
-    # xorg-xcmsdb xorg-xcursorgen xorg-xdpyinfo xorg-xdriinfo xorg-xev
-    # xorg-xgamma xorg-xhost xorg-xinput xorg-xkbcomp xorg-xkbevd xorg-xkbutils
-    # xorg-xkill xorg-xlsatoms xorg-xlsclients xorg-xmodmap xorg-xpr xorg-xprop
-    # xorg-xrandr xorg-xrdb xorg-xrefresh xorg-xset xorg-xsetroot xorg-xvinfo
-    # xorg-xwd xorg-xwininfo xorg-xwud)
-
-    # XDG Utils such as xdg-open
-    # depends+=(xdg-utils)
-
-    # TODO: polkit authentication agent? mate-polkit
+    # xorg-apps group
+    depends+=(xorg-xsetroot xorg-xkill xorg-xbacklight xorg-bdftopcf
+    xorg-iceauth xorg-luit xorg-mkfontdir xorg-mkfontscale xorg-sessreg
+    xorg-setxkbmap xorg-smproxy xorg-x11perf xorg-xauth xorg-xbacklight
+    xorg-xcmsdb xorg-xcursorgen xorg-xdpyinfo xorg-xdriinfo xorg-xev
+    xorg-xgamma xorg-xhost xorg-xinput xorg-xkbcomp xorg-xkbevd xorg-xkbutils
+    xorg-xkill xorg-xlsatoms xorg-xlsclients xorg-xmodmap xorg-xpr xorg-xprop
+    xorg-xrandr xorg-xrdb xorg-xrefresh xorg-xset xorg-xsetroot xorg-xvinfo
+    xorg-xwd xorg-xwininfo xorg-xwud)
 
     # TODO: Audio? http://nullwise.com/volumeicon.html
     # depends+=(pulseaudio)
 
     # Fonts
-    # depends+=(nerd-fonts-complete system-san-francisco-font-git)
+    depends+=(
+        nerd-fonts-complete
+        system-san-francisco-font-git
+    )
 
     # Compositor (Compton)
     # depends+=(compton)
@@ -381,34 +383,34 @@ package_osafi-desktop() {
         "${pkgdir}/etc/xdg/termite.cfg"
     
     # General applications
-    depends+=(google-chrome)
+    depends+=(
+        google-chrome
+    )
 }
 
 package_osafi-dell-xps() {
     install=osafi-dell-xps.install
     depends=(osafi-desktop osafi-devel)
 
-    # Wifi
-    # depends+=(
-    #     iw
-    #     network-manager-applet
-    #     wireless_tools
-    #     networkmanager
-    # )
-
-    # Backlight
-    # depends+=(light)
-
-    # Touchpad options + gestures support
-    # depends+=(libinput-gestures xf86-input-libinput)
+    # Touchpad gestures support
+    # depends+=(libinput-gestures)
     # install -Dm 0755 ../osafi-dell-xps/libinput-gestures.sh \
     #     "${pkgdir}/etc/osafi/wminitrc.d/90-libinput-gestures.sh"
-    # install -Dm 0644 ../osafi-dell-xps/xps-libinput.conf \
-    #     "${pkgdir}/etc/X11/xorg.conf.d/99-xps-libinput.conf"
 
-    # Set hidpi
+    # Touchpad options
+    depends+=(xf86-input-libinput)
+    install -Dm 0644 ../osafi-dell-xps/xps-libinput.conf \
+        "${pkgdir}/etc/X11/xorg.conf.d/99-xps-libinput.conf"
+
+    # Set hidpi related variables
     install -Dm 0755 ../osafi-dell-xps/hidpi.sh \
         "${pkgdir}/etc/X11/xinit/xinitrc.d/10-hidpi.sh"
+
+    # KDE related config w/ HiDPI stuff
+    install -Dm 0644 ../osafi-dell-xps/kcmfonts \
+        "${pkgdir}/etc/xdg/kcmfonts"
+    install -Dm 0644 ../osafi-dell-xps/kdeglobals \
+        "${pkgdir}/etc/xdg/kdeglobals"
 
     # Larger font in consoles
     install -Dm 0644 ../osafi-dell-xps/vconsole.conf \

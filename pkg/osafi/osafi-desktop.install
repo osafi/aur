@@ -6,6 +6,7 @@ post_upgrade() {
     ln --force --symbolic /usr/bin/google-chrome-stable /usr/bin/google-chrome
 
     systemctl enable --now lightdm
+    systemctl enable --now NetworkManager
 }
 
 pre_remove() {

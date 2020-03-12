@@ -3,5 +3,5 @@ post_install() {
 }
 
 post_upgrade() {
-    # systemctl enable --now NetworkManager
+    # nothing yet
 }
