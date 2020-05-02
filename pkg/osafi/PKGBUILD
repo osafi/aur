@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=52
+pkgrel=53
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -325,7 +325,7 @@ package_osafi-desktop() {
     xorg-xwd xorg-xwininfo xorg-xwud)
 
     # TODO: Audio? http://nullwise.com/volumeicon.html
-    # depends+=(pulseaudio)
+    depends+=(pulseaudio)
 
     # Fonts
     depends+=(
@@ -334,11 +334,11 @@ package_osafi-desktop() {
     )
 
     # Compositor (Compton)
-    # depends+=(compton)
-    # install -Dm 0644 ../osafi-desktop/compton/compton.conf \
-    #     "${pkgdir}/etc/osafi/compton/compton.conf"
-    # install -Dm 0755 ../osafi-desktop/compton/compton.sh \
-    #     "${pkgdir}/etc/osafi/wminitrc.d/10-compton.sh"
+    depends+=(compton)
+    install -Dm 0644 ../osafi-desktop/compton/compton.conf \
+        "${pkgdir}/etc/osafi/compton/compton.conf"
+    install -Dm 0755 ../osafi-desktop/compton/compton.sh \
+        "${pkgdir}/etc/osafi/wminitrc.d/10-compton.sh"
 
     # Window manager (BSPWM)
     depends+=(bspwm)
@@ -355,27 +355,27 @@ package_osafi-desktop() {
         "${pkgdir}/etc/osafi/wminitrc.d/10-sxhkd.sh"
 
     # Wallpaper
-    # depends+=(feh)
-    # install -Dm 0644 ../osafi-desktop/wallpaper/wallpaper.jpg \
-    #     "${pkgdir}/usr/share/backgrounds/osafi/wallpaper.jpg"
-    # install -Dm 0755 ../osafi-desktop/wallpaper/wallpaper.sh \
-    #     "${pkgdir}/etc/osafi/wminitrc.d/20-wallpaper.sh"
+    depends+=(feh)
+    install -Dm 0644 ../osafi-desktop/wallpaper/wallpaper.jpg \
+        "${pkgdir}/usr/share/backgrounds/osafi/wallpaper.jpg"
+    install -Dm 0755 ../osafi-desktop/wallpaper/wallpaper.sh \
+        "${pkgdir}/etc/osafi/wminitrc.d/20-wallpaper.sh"
 
     # Polybar
-    # depends+=(polybar-git)
-    # install -Dm 0644 ../osafi-desktop/polybar/config \
-    #     "${pkgdir}/etc/osafi/polybar/config"
-    # install -Dm 0755 ../osafi-desktop/polybar/check-network.sh \
-    #     "${pkgdir}/etc/osafi/polybar/check-network.sh"
-    # install -Dm 0755 ../osafi-desktop/polybar/powermenu.sh \
-    #     "${pkgdir}/etc/osafi/polybar/powermenu.sh"
-    # install -Dm 0755 ../osafi-desktop/polybar/polybar.sh \
-    #     "${pkgdir}/etc/osafi/wminitrc.d/30-polybar.sh"
+    depends+=(polybar-git)
+    install -Dm 0644 ../osafi-desktop/polybar/config \
+        "${pkgdir}/etc/osafi/polybar/config"
+    install -Dm 0755 ../osafi-desktop/polybar/check-network.sh \
+        "${pkgdir}/etc/osafi/polybar/check-network.sh"
+    install -Dm 0755 ../osafi-desktop/polybar/powermenu.sh \
+        "${pkgdir}/etc/osafi/polybar/powermenu.sh"
+    install -Dm 0755 ../osafi-desktop/polybar/polybar.sh \
+        "${pkgdir}/etc/osafi/wminitrc.d/30-polybar.sh"
 
     # Rofi launcher
-    # depends+=(rofi)
-    # install -Dm 0755 ../osafi-desktop/rofi/rofi.sh \
-    #     "${pkgdir}/etc/osafi/wminitrc.d/90-rofi.sh"
+    depends+=(rofi)
+    install -Dm 0755 ../osafi-desktop/rofi/rofi.sh \
+        "${pkgdir}/etc/osafi/wminitrc.d/90-rofi.sh"
 
     # Terminal
     depends+=(termite)
@@ -393,9 +393,9 @@ package_osafi-dell-xps() {
     depends=(osafi-desktop osafi-devel)
 
     # Touchpad gestures support
-    # depends+=(libinput-gestures)
-    # install -Dm 0755 ../osafi-dell-xps/libinput-gestures.sh \
-    #     "${pkgdir}/etc/osafi/wminitrc.d/90-libinput-gestures.sh"
+    depends+=(libinput-gestures)
+    install -Dm 0755 ../osafi-dell-xps/libinput-gestures.sh \
+        "${pkgdir}/etc/osafi/wminitrc.d/90-libinput-gestures.sh"
 
     # Touchpad options
     depends+=(xf86-input-libinput)
