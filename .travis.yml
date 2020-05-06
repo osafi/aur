@@ -6,8 +6,8 @@ before_script:
   - docker run --detach --tty --name arch-builder arch-builder bash
 script:
   - docker exec arch-builder bash sync-remote-repo ${TRAVIS_REPO_SLUG} ${TRAVIS_TAG}
-  - travis_wait 60 docker exec arch-builder bash build-aur ${TRAVIS_REPO_SLUG} ${TRAVIS_BUILD_ID}
-  - travis_wait 60 docker exec arch-builder bash build-pkg ${TRAVIS_REPO_SLUG}
+  - travis_wait 120 docker exec arch-builder bash build-aur ${TRAVIS_REPO_SLUG} ${TRAVIS_BUILD_ID}
+  - travis_wait 120 docker exec arch-builder bash build-pkg ${TRAVIS_REPO_SLUG}
 before_deploy:
   - docker cp arch-builder:/home/builder/bin ${TRAVIS_TAG}
 deploy:
