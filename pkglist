@@ -1,4 +1,3 @@
-# bcompare # this package depends on 'qt4' which will not build - need to investigate
 cloudfoundry-cli
 etcher-bin
 google-chrome

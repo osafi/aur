@@ -1,0 +1,45 @@
+name: Build ArchLinux Package Repository
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron:  '* 18 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: osafi/arch-pkg-builder
+    steps:
+      - name: Setup workspace
+        run: |
+             sudo mkdir -p $GITHUB_WORKSPACE
+             sudo chown builder:builder $GITHUB_WORKSPACE
+             sudo mkdir -p $HOME
+             sudo chown builder:builder $HOME
+
+      - uses: actions/checkout@v2
+        name: Checkout
+
+      - name: Sync remote repo
+        run: ./scripts/sync-remote-repo ${GITHUB_REPOSITORY} repository
+        
+      - name: Build AUR packages
+        run: ./scripts/build-aur ${GITHUB_REPOSITORY}
+      
+      - name: Build packages
+        run: ./scripts/build-pkg ${GITHUB_REPOSITORY}
+
+      - name: Upload packages to release
+        uses: ncipollo/release-action@v1.6.1
+        with:
+          allowUpdates: true
+          artifacts: ./bin/*.+(db|files|gz|xz)
+          tag: repository
+          commit: master
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cleanup old packages
+        run: python ./scripts/clean-remote-repo ${{ secrets.ACCESS_TOKEN_GITHUB }} ${GITHUB_REPOSITORY} repository

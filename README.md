@@ -1,6 +1,6 @@
-# aur [![Build Status](https://travis-ci.org/osafi/aur.svg?branch=master)](https://travis-ci.org/osafi/aur)
+# aur [![Build](https://github.com/osafi/aur/workflows/Build%20ArchLinux%20Package%20Repository/badge.svg)](https://github.com/osafi/aur/actions)
 
-Use [Travis CI](https://travis-ci.org/osafi/aur) for building and packaging a few [AUR](https://aur.archlinux.org) packages and deploy them to [GitHub Releases](https://github.com/osafi/aur/releases) so it can be used as repository in [Arch Linux](https://www.archlinux.org).
+Use GitHub Actions for building and packaging a few [AUR](https://aur.archlinux.org) packages and deploy them to [GitHub Releases](https://github.com/osafi/aur/releases) so it can be used as repository in [Arch Linux](https://www.archlinux.org).
 
 ## Use repository
 
@@ -24,14 +24,9 @@ pacman -S {package}   # Install a package.
 
 ## Forking repository
 
-For build the [AUR](https://aur.archlinux.org) packages of your election fork this repository and enable [Travis CI](https://travis-ci.org):
+To build the [AUR](https://aur.archlinux.org) packages of your choice fork this repository and setup the GitHub Actions workflow:
 
   - Fork this GitHub repository and edit `pkglist`.
-  - Create a release for your new forked repository.
   - Generate a personal access token with scope `public_repo`.
-  - Enable Travis CI for your new forked repository.
-  - In Travis CI repository settings disable build pull request updates, for security.
-  - In Travis CI repository settings declare two environment variables:
-    - `GITHUB_TOKEN`: The previously created personal access token, disable display value.
-    - `TRAVIS_TAG`: The name of your previosly created GitHub release.
-  - Optionally, enable a cron job in Travis CI repository settings.
+  - In the forked repository settings declare the following secrets:
+    - `ACCESS_TOKEN_GITHUB`: The previously created personal access token
