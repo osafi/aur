@@ -15,7 +15,7 @@ def main():
     repository = Github(github_token).get_user().get_repo(repo_name)
 
     for asset in repository.get_release(tag_name).get_assets():
-        if asset.name.endswith('.pkg.tar.xz') and not asset.name.startswith(tuple(packages)):
+        if asset.name.endswith('.pkg.tar.zst') and not asset.name.startswith(tuple(packages)):
             if asset.delete_asset():
                 print('Deleted: {0}'.format(asset.name))
             else:

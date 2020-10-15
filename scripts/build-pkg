@@ -10,12 +10,12 @@ declare -r repodb="${repodir}/${pkgrepo}.db.tar.gz"
 for package in pkg/* ; do
 	pushd "$package"
 	makepkg --ignorearch --cleanbuild --clean --syncdeps --rmdeps --noconfirm --force
-	mv *.pkg.tar.xz "${repodir}"
+	mv *.pkg.tar.zst "${repodir}"
 	popd
 done
 
 pushd bin
-repo-add "${repodb}" *.pkg.tar.xz
+repo-add "${repodb}" *.pkg.tar.zst
 popd
 
 { set +ex; } 2>/dev/null

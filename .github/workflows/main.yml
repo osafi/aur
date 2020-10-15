@@ -36,7 +36,7 @@ jobs:
         uses: ncipollo/release-action@v1.6.1
         with:
           allowUpdates: true
-          artifacts: ./bin/*.+(db|files|gz|xz)
+          artifacts: ./bin/*.+(db|files|gz|zst)
           tag: repository
           commit: master
           token: ${{ secrets.GITHUB_TOKEN }}
