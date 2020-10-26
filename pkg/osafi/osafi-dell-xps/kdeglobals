@@ -112,10 +112,10 @@ XftHintStyle=hintslight
 XftSubPixel=rgb
 shadeSortColumn=true
 widgetStyle=Breeze
-font=SFNS Display,10,-1,5,50,0,0,0,0,0,Regular
-menuFont=SFNS Display,10,-1,5,50,0,0,0,0,0,Regular
-smallestReadableFont=SFNS Display,8,-1,5,50,0,0,0,0,0,Regular
-toolBarFont=SFNS Display,10,-1,5,50,0,0,0,0,0,Regular
+font=SF Pro Display,10,-1,5,50,0,0,0,0,0,Regular
+menuFont=SF Pro Display,10,-1,5,50,0,0,0,0,0,Regular
+smallestReadableFont=SF Pro Display,8,-1,5,50,0,0,0,0,0,Regular
+toolBarFont=SF Pro Display,10,-1,5,50,0,0,0,0,0,Regular
 
 [Icons]
 Theme=breeze
@@ -136,4 +136,4 @@ activeForeground=252,252,252
 inactiveBackground=239,240,241
 inactiveBlend=75,71,67
 inactiveForeground=189,195,199
-activeFont=SFNS Display,10,-1,5,50,0,0,0,0,0,Regular
+activeFont=SF Pro Display,10,-1,5,50,0,0,0,0,0,Regular

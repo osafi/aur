@@ -1,7 +1,7 @@
 #!/bin/sh
 
 xrdb -override - <<EOF
-rofi.font: SFNS Display 28
+rofi.font: SF Pro Display 28
 rofi.show-icons: true
 
 EOF
