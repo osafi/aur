@@ -330,7 +330,7 @@ package_osafi-desktop() {
     # Fonts
     depends+=(
         nerd-fonts-complete
-        # system-san-francisco-font-git
+        otf-san-francisco-pro
     )
 
     # Compositor (Compton)
