@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=56
+pkgrel=57
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -62,6 +62,7 @@ package_osafi-devel() {
         code
         git
         jq
+        kr-bin
     )
 
     # JetBrains tools
