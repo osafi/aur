@@ -44,6 +44,6 @@ for pkgkey in ${pkgkeys[@]}; do
 done
 
 # Build outdated packages.
-aur sync --database ${pkgrepo} --root "$AURBIN" --noconfirm --rmdeps ${pkglist[@]}
+aur sync --database ${pkgrepo} --root "$AURBIN" --noconfirm --noview --rmdeps ${pkglist[@]}
 
 { set +ex; } 2>/dev/null
