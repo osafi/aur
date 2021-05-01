@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=60
+pkgrel=61
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -156,8 +156,6 @@ package_osafi-desktop() {
         artikulate
         audiocd-kio
         blinken
-        bomber
-        bovo
         cantor
         cervisia
         dolphin
@@ -166,7 +164,6 @@ package_osafi-desktop() {
         elisa
         ffmpegthumbs
         filelight
-        granatier
         grantlee-editor
         gwenview
         juk
@@ -174,22 +171,15 @@ package_osafi-desktop() {
         kaccounts-integration
         kaccounts-providers
         kaddressbook
-        kajongg
         kalarm
         kalgebra
         kalzium
         kamera
         kamoso
         kanagram
-        kapman
         kapptemplate
         kate
-        katomic
         kbackup
-        kblackbox
-        kblocks
-        kbounce
-        kbreakout
         kbruch
         kcachegrind
         kcalc
@@ -208,86 +198,56 @@ package_osafi-desktop() {
         kdesdk-thumbnailers
         kdf
         kdialog
-        kdiamond
         keditbookmarks
         kfind
         kfloppy
-        kfourinline
         kgeography
         kget
-        kgoldrunner
         kgpg
         khangman
         khelpcenter
         kig
-        kigo
-        killbots
         kimagemapeditor
         kio-extras
         kipi-plugins
         kirigami-gallery
-        kiriki
         kiten
-        kjumpingcube
         kleopatra
         klettres
-        klickety
-        klines
         kmag
-        kmahjongg
         kmail
         kmail-account-wizard
-        kmines
         kmix
         kmousetool
         kmouth
         kmplot
-        knavalbattle
-        knetwalk
-        knights
         knotes
-        kolf
-        kollision
         kolourpaint
         kompare
         konqueror
-        konquest
         konsole
         kontact
         kopete
         korganizer
-        kpatience
         krdc
-        kreversi
         krfb
         kross-interpreters
         kruler
-        kshisen
-        ksirk
-        ksnakeduel
-        kspaceduel
-        ksquares
-        ksudoku
         ksystemlog
         kteatime
         ktimer
         ktouch
-        ktuberling
         kturtle
-        kubrick
         kwalletmanager
         kwave
         kwordquiz
         kwrite
         lokalize
-        lskat
         marble
         mbox-importer
         minuet
         okular
-        palapeli
         parley
-        picmi
         pim-data-exporter
         pim-sieve-editor
         poxml
