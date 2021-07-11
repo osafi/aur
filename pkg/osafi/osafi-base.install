@@ -3,7 +3,7 @@ post_install() {
 }
 
 post_upgrade() {
-    ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+    ln -sf /usr/share/zoneinfo/America/Chicago /etc/localtime
     echo "LANG=en_US.UTF-8" > /etc/locale.conf
     sed 's/#en_US/en_US/' -i /etc/locale.gen
     locale-gen
