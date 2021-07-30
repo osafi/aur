@@ -337,10 +337,10 @@ package_osafi-desktop() {
     install -Dm 0755 ../osafi-desktop/rofi/rofi.sh \
         "${pkgdir}/etc/osafi/wminitrc.d/90-rofi.sh"
 
-    # Terminal
-    depends+=(termite)
-    install -Dm 0644 ../osafi-desktop/termite/termite.cfg \
-        "${pkgdir}/etc/xdg/termite.cfg"
+    # Terminal (need to pick a new one...termite is no longer maintained)
+    # depends+=(termite)
+    # install -Dm 0644 ../osafi-desktop/termite/termite.cfg \
+    #     "${pkgdir}/etc/xdg/termite.cfg"
     
     # General applications
     depends+=(
