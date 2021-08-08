@@ -9,32 +9,32 @@ trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 exec 1> >(tee "stdout.log")
 exec 2> >(tee "stderr.log")
 
-### Get infomation from user ###
-hostname=$(dialog --stdout --inputbox "Enter hostname" 0 0) || exit 1
+## Get infomation from user ###
+hostname=$(whiptail --inputbox "Enter hostname" 15 60 3>&1 1>&2 2>&3) || exit 1
 clear
 : ${hostname:?"hostname cannot be empty"}
 
-user=$(dialog --stdout --inputbox "Enter admin username" 0 0) || exit 1
+user=$(whiptail --inputbox "Enter admin username" 15 60 3>&1 1>&2 2>&3) || exit 1
 clear
 : ${user:?"user cannot be empty"}
 
-full_name=$(dialog --stdout --inputbox "Enter admin full name" 0 0) || exit 1
+full_name=$(whiptail --inputbox "Enter admin full name" 15 60 3>&1 1>&2 2>&3) || exit 1
 clear
 : ${full_name:?"full name cannot be empty"}
 
-password=$(dialog --stdout --passwordbox "Enter admin password" 0 0) || exit 1
+password=$(whiptail --passwordbox "Enter admin password" 15 60 3>&1 1>&2 2>&3) || exit 1
 clear
 : ${password:?"password cannot be empty"}
-password2=$(dialog --stdout --passwordbox "Enter admin password again" 0 0) || exit 1
+password2=$(whiptail --passwordbox "Enter admin password again" 15 60 3>&1 1>&2 2>&3) || exit 1
 clear
 [[ "$password" == "$password2" ]] || ( echo "Passwords did not match"; exit 1; )
 
-devicelist=$(lsblk -dplnx size -o name,size | grep -Ev "boot|rpmb|loop" | tac)
-device=$(dialog --stdout --menu "Select installation disk" 0 0 0 ${devicelist}) || exit 1
+device_options=$(lsblk -d -p -n -l -o NAME,SIZE -e 7,11)
+device=$(whiptail --menu "Select installation disk" 15 60 0 ${device_options[@]} 3>&1 1>&2 2>&3) || exit 1
 clear
 
 REPO_URL="https://github.com/osafi/aur/releases/download/repository"
-MIRRORLIST_URL="https://www.archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on"
+MIRRORLIST_URL="https://archlinux.org/mirrorlist/?country=US&protocol=https&use_mirror_status=on"
 
 timedatectl set-ntp true
 
@@ -45,7 +45,7 @@ pacman -Sy --noconfirm archlinux-keyring
 pacman -Sy --noconfirm pacman-contrib
 
 echo "Updating mirror list"
-curl -s "$MIRRORLIST_URL" | \
+curl -sL "$MIRRORLIST_URL" | \
     sed -e 's/^#Server/Server/' -e '/^#/d' | \
     rankmirrors -n 5 - > /etc/pacman.d/mirrorlist
 
@@ -122,8 +122,8 @@ menuentry 'ArchLinux Live CD' {
   set imgdevpath='/dev/disk/by-uuid/$part_reco_uuid'
   set isofile='/archlinux.iso'
   loopback loop (\$isopart)\$isofile
-  linux (loop)/arch/boot/x86_64/vmlinuz archisodevice=/dev/loop0 img_dev=\$imgdevpath img_loop=\$isofile earlymodules=loop copytoram
-  initrd (loop)/arch/boot/x86_64/archiso.img
+  linux (loop)/arch/boot/x86_64/vmlinuz-linux img_dev=\$imgdevpath img_loop=\$isofile earlymodules=loop copytoram
+  initrd (loop)/arch/boot/x86_64/initramfs-linux.img
 }
 EOF
 arch-chroot /mnt chmod +x /etc/grub.d/40_archiso
