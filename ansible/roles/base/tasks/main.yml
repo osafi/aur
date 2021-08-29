@@ -1,0 +1,4 @@
+---
+- name: Refresh pacman mirrors
+  pacman:
+    update_cache: yes
