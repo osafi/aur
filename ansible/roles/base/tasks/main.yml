@@ -1,4 +1,12 @@
 ---
+- name: Add custom AUR repo
+  blockinfile:
+    path: /etc/pacman.conf
+    block: |
+      [aur]
+      SigLevel = Optional TrustAll
+      Server = https://github.com/osafi/aur/releases/download/repository
+
 - name: Refresh pacman mirrors
   pacman:
     update_cache: yes
