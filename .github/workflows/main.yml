@@ -36,10 +36,11 @@ jobs:
         uses: ncipollo/release-action@v1.8.10
         with:
           allowUpdates: true
+          artifactErrorsFailBuild: true
           artifacts: ./bin/*.+(db|files|gz|zst)
           tag: repository
           commit: master
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Cleanup old packages
-        run: python ./scripts/clean-remote-repo ${{ secrets.ACCESS_TOKEN_GITHUB }} ${GITHUB_REPOSITORY} repository
+        run: python ./scripts/clean-remote-repo ${{ secrets.GITHUB_TOKEN }} ${GITHUB_REPOSITORY} repository
