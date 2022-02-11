@@ -6,6 +6,7 @@ on:
       - master
   schedule:
     - cron:  '0 0 * * *'
+  workflow_dispatch: # Enables the manual 'Run Workflow' button in GitHub UI
 
 jobs:
   build:
