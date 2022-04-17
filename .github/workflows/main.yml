@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: osafi/arch-pkg-builder
-      options: --user 1000
+      options: --user 1001
     steps:
       - name: Setup workspace
         run: |
