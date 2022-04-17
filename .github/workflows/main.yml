@@ -17,9 +17,10 @@ jobs:
       - name: Setup workspace
         run: |
              sudo mkdir -p $GITHUB_WORKSPACE
-             sudo chown builder:builder $GITHUB_WORKSPACE
+             sudo mkdir -p $GITHUB_WORKSPACE/_temp
+             sudo chown -R builder:builder $GITHUB_WORKSPACE
              sudo mkdir -p $HOME
-             sudo chown builder:builder $HOME
+             sudo chown -R builder:builder $HOME
 
       - uses: actions/checkout@v3
         name: Checkout
