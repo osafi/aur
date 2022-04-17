@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: osafi/arch-pkg-builder
+      options: --user 1000
     steps:
       - name: Setup workspace
         run: |
@@ -20,7 +21,6 @@ jobs:
              sudo chown -R builder:builder $GITHUB_WORKSPACE
              sudo mkdir -p $HOME
              sudo chown -R builder:builder $HOME
-             sudo chmod -R 666 /__w
 
       - uses: actions/checkout@v3
         name: Checkout
