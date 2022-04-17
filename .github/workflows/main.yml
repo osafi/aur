@@ -18,10 +18,9 @@ jobs:
         run: |
              sudo mkdir -p $GITHUB_WORKSPACE
              sudo chown -R builder:builder $GITHUB_WORKSPACE
-             echo $HOME
              sudo mkdir -p $HOME
              sudo chown -R builder:builder $HOME
-             sudo ls -alR $GITHUB_WORKSPACE
+             sudo chmod -R 666 /__w
 
       - uses: actions/checkout@v3
         name: Checkout
