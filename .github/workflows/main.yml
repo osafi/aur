@@ -21,6 +21,7 @@ jobs:
              sudo chown -R builder:builder $GITHUB_WORKSPACE
              sudo mkdir -p $HOME
              sudo chown -R builder:builder $HOME
+             sudo ls -alR $GITHUB_WORKSPACE
 
       - uses: actions/checkout@v3
         name: Checkout
