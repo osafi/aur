@@ -17,8 +17,9 @@ jobs:
       - name: Setup workspace
         run: |
              sudo mkdir -p $GITHUB_WORKSPACE
-             sudo mkdir -p $GITHUB_WORKSPACE/_temp
              sudo chown -R builder:builder $GITHUB_WORKSPACE
+             sudo mkdir -p $RUNNER_TEMP
+             sudo chown -R builder:builder $RUNNER_TEMP
              sudo mkdir -p $HOME
              sudo chown -R builder:builder $HOME
              sudo ls -alR $GITHUB_WORKSPACE
