@@ -14,15 +14,6 @@ jobs:
     container:
       image: osafi/arch-pkg-builder
     steps:
-      - name: Setup workspace
-        run: |
-             whoami
-             ls -alR /__w/
-             sudo mkdir -p $GITHUB_WORKSPACE
-             sudo chown -R builder:builder $GITHUB_WORKSPACE
-             sudo mkdir -p $HOME
-             sudo chown -R builder:builder $HOME
-
       - uses: actions/checkout@v3
         name: Checkout
 
