@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=63
+pkgrel=64
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -195,7 +195,7 @@ package_osafi-desktop() {
         kdenetwork-filesharing
         kdenlive
         kdepim-addons
-        kdesdk-kioslaves
+        kdesdk-kio
         kdesdk-thumbnailers
         kdf
         kdialog
@@ -242,7 +242,7 @@ package_osafi-desktop() {
         kwalletmanager
         kwave
         kwordquiz
-        kwrite
+        kate
         lokalize
         marble
         mbox-importer
@@ -272,7 +272,7 @@ package_osafi-desktop() {
         telepathy-kde-text-ui
         umbrello
         yakuake
-        zeroconf-ioslave
+        kio-zeroconf
     )
 
     # xorg-apps group
