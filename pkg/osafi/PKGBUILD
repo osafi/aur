@@ -2,7 +2,7 @@
 pkgbase='osafi'
 pkgname=(osafi-base osafi-devel osafi-desktop osafi-dell-xps)
 pkgver=1
-pkgrel=65
+pkgrel=66
 pkgdesc="System configuration for osafi systems"
 arch=('any')
 url="https://github.com/osafi/arch-pkgs"
@@ -258,18 +258,6 @@ package_osafi-desktop() {
         spectacle
         step
         sweeper
-        telepathy-kde-accounts-kcm
-        telepathy-kde-approver
-        telepathy-kde-auth-handler
-        telepathy-kde-call-ui
-        telepathy-kde-common-internals
-        telepathy-kde-contact-list
-        telepathy-kde-contact-runner
-        telepathy-kde-desktop-applets
-        telepathy-kde-filetransfer-handler
-        telepathy-kde-integration-module
-        telepathy-kde-send-file
-        telepathy-kde-text-ui
         umbrello
         yakuake
         kio-zeroconf
